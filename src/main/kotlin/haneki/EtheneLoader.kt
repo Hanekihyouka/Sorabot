@@ -709,6 +709,9 @@ fun loadModule(){
     moduleLoader.moduleList.put(vanillaBattle.module_name,vanillaBattle)
     var deck = Deck("Deck")
     moduleLoader.moduleList.put(deck.module_name,deck)
+    var gelbooru = Gelbooru("Gelbooru")
+    moduleLoader.moduleList.put(gelbooru.module_name,gelbooru)
+
 }
 
 /**
