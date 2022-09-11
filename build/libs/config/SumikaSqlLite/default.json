@@ -1,8 +1,0 @@
-{
-  "(?i)LiteTest": {
-    "CARD_UNIT_SUGURI46": "unitCharacter",
-    "CARD_BATTLE_ACCELHYPER": "cardDeck",
-    "CARD_UNIT_SUGURI_V2": "unitCharacter",
-    "CARD_HYPER_SUGURI": "cardHyper"
-  }
-}

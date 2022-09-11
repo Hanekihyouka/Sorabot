@@ -1,4 +1,0 @@
-节制（Temperance）逆位
-
-宜  ATK+DEF+EVD≠0 的角色
-忌  ATK·DEF·EVD=+1的角色
