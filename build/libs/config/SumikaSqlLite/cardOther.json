@@ -1,0 +1,19 @@
+ {
+  "(大人的)?(打)?雪仗": {
+    "CARD_XMAS2018_GROWNUPSNOWBALLFIGHT": "cardOther"
+  },
+  "(?i)雪球反射(器)?|反射|雪仗|雪球":{
+	"CARD_XMAS2018_SNOWBALLREFLECTOR": "cardOther"
+  },
+  "(?i)(甜点)?战争.?|甜点|情人节":{
+	"CARD_GIFT_VALENTINESDAY2018": "cardOther",
+	"CARD_GIFT_VALENTINESDAY2018_BINDER": "cardOther"
+  },
+  "(?i)红.?蓝|小红|小蓝|小(蓝|红).?小(蓝|红)":{
+	"CARD_GIFT_REDBLUE": "cardOther"
+  },
+  "(?i)货(物)?":{
+	"CARD_BATTLE_FREIGHT": "cardOther",
+	"CARD_BOOST_COOP_FREIGHT":"cardOther"
+  }
+}
