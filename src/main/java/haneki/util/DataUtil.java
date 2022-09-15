@@ -32,4 +32,15 @@ public class DataUtil {
         Matcher m = r.matcher(content);
         return m.matches();
     }
+
+    public static boolean isNumericZidai(String str){
+        for (int i = 0; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

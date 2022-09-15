@@ -65,7 +65,7 @@ shadowJar {
         )
     }
 
-    // 将 build.gradle 打入到 jar 中, 方便查看依赖包版
+    // 将 build.gradle 打入到 jar 中, 方便查看依赖包版本
     from("./"){
         include 'build.gradle'
     }
