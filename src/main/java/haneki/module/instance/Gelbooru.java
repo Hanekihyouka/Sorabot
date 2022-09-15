@@ -54,8 +54,14 @@ public class Gelbooru extends BasicModule implements MessageModule {
 
                 Group group = bot.getGroup(205312025L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
+                String booruImageUrl = "http://interface.oranges.wang/common/data/emotes/fr_mpoppo00_large.png";
+                if (booruImageInfo.getRating().equals("e")){
+                    forwardMessageBuilder.add(bot.getId(),"booru",new PlainText("此图片分级为 Explicit，查看请直接根据[id]前往图库访问。"));
+                }else{
+                    booruImageUrl = booruImageInfo.getImage_url();
+                }
                 try {
-                    ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(booruImageInfo.getImage_url()));
+                    ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(booruImageUrl));
                     Image img = ExternalResource.uploadAsImage(ex,group);//上传图片
                     forwardMessageBuilder.add(bot.getId(),"booru",img);
                     StringBuilder tags = new StringBuilder();
@@ -70,6 +76,7 @@ public class Gelbooru extends BasicModule implements MessageModule {
                     System.out.println("[WebGet]请求/上传图片时出错。");
                     e.printStackTrace();
                 }
+
                 messageChainBuilder.append(forwardMessageBuilder.build());
 
                 break;

@@ -128,7 +128,7 @@ fun Bot.messageDSL(){
                                 else -> {}
                             }//群聊，则预先设置为本群id。如果p大于4，则设置p4
                             if (params.size > 4){ group2bSet = params[4].toLong()
-                                if (!(cfg_core.operator.contains(sender.id))){
+                                if (!((getPermissionLevel(sender.id)>9) or (getGroup(group2bSet)?.getMember(sender.id)?.permission?.level!! >0))){
                                     group2bSet = 0L//权限确认。如果不是次级管理，不能直接使用群号设置。
                                 }
                             }// ##ess module enable moduleName groupID
@@ -162,7 +162,7 @@ fun Bot.messageDSL(){
                                 else -> {}
                             }//群聊，则预先设置为本群id。如果p大于4，则设置p4
                             if (params.size > 4){ group2bSet = params[4].toLong()
-                                if (!(cfg_core.operator.contains(sender.id))){
+                                if (!((getPermissionLevel(sender.id)>9) or (getGroup(group2bSet)?.getMember(sender.id)?.permission?.level!! >0))){
                                     group2bSet = 0L//权限确认。如果不是次级管理，不能直接使用群号设置。
                                 }
                             }// ##ess module enable moduleName groupID
@@ -381,7 +381,7 @@ fun Bot.messageDSL(){
                     subject.sendMessage(messageChainBuilder.build())
                 }
                 "blacklist","-bl" ->{
-                    if (cfg_core.operator.contains(sender.id)){
+                    if ((getPermissionLevel(sender.id)>9)){
                         messageChainBuilder.append("黑名单列表>")
                         cfg_core.blackList.forEach{
                             messageChainBuilder.append(Mirai.queryProfile(bot,it).nickname + "\u202D(" + it.toString() + ")   ")
