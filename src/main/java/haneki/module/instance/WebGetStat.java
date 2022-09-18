@@ -14,7 +14,7 @@ import net.mamoe.mirai.utils.ExternalResource;
 import java.sql.*;
 
 public class WebGetStat extends BasicModule implements MessageModule {
-    static final String URL_HEADER = "https://interface.oranges.wang/stat/render.php?steamid=";
+    static final String URL_HEADER = "http://interface.oranges.wang/stat/render.php?steamid=";
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/data_ethene";
     static final String USER = "sora";

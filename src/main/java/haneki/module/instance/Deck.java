@@ -11,7 +11,7 @@ import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.utils.ExternalResource;
 
 public class Deck extends BasicModule implements MessageModule {
-    static final String URL_HEADER = "https://interface.oranges.wang/deck/render.php?deck=";//P___________
+    static final String URL_HEADER = "http://interface.oranges.wang/deck/render.php?deck=";//P___________
 
     public Deck(String module_name) {
         super(module_name);
