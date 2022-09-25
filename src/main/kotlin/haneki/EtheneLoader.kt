@@ -6,6 +6,7 @@ import haneki.module.ModuleLoader
 import haneki.module.NeedOperactor
 import haneki.module.instance.*
 import kotlinx.coroutines.delay
+import net.dv8tion.jda.api.JDABuilder
 import net.mamoe.mirai.*
 import net.mamoe.mirai.contact.getMember
 import net.mamoe.mirai.contact.nameCardOrNick
@@ -48,6 +49,7 @@ suspend fun main() {
     }.alsoLogin()
 
     bot.updateConfig()
+    bot.jdaBuilder(bot)
     bot.messageDSL()
     timer(bot)
     bot.join() // 等待 Bot 离线, 避免主线程退出
@@ -754,4 +756,15 @@ suspend fun timer(bot:Bot){
         //间隔
         delay(1002 * 60)
     }while(true)
+}
+
+
+/**
+ * Discord 2 miria
+ *
+ * */
+fun Bot.jdaBuilder(bot:Bot){
+    var d2m = Discord2Mirai(bot)
+    val jda = JDABuilder.createDefault("ODE5ODc3MDExNzA2NjA5NjY2.YEs_-A.bK3cus1MUxt2bUIdVrjR3SoaUjw").build()
+    jda.addEventListener(d2m)
 }
