@@ -104,7 +104,7 @@ fun Bot.messageDSL(){
 
         Regex("(?i).?.?help")matching{
             subject.sendMessage("SoraBot使用指南>\n" +
-                    "https://wiki.oranges.wang/zh/%E5%B7%A5%E5%85%B7/SoraBot%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97")
+                    "http://100oj.com/zh/%E5%B7%A5%E5%85%B7/SoraBot%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97")
         }
         /**
          * ess模块的一部分，涉及核心的内容，直接写在这里
