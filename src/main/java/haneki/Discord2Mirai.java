@@ -151,12 +151,12 @@ public class Discord2Mirai extends ListenerAdapter {
                     System.out.println("[tmd抓取]->" + tmd_command);
                     pro.waitFor();
                     System.out.println("[tmd抓取结束]");
-                    File dir = new File(tmd_dirPath);
+                    File dir = new File(tmd_dirPath + "/twitter_media_download");
                     File[] files = dir.listFiles();
                     for (File img:files) {
                         String img_name = img.getName();
                         if (img_name.endsWith(".jpg")|img_name.endsWith(".png")|img_name.endsWith(".jpeg")|img_name.endsWith(".gif")){
-                            Image sendimg = net.mamoe.mirai.contact.Contact.uploadImage(bot.getGroup(475379747), new FileInputStream(tmd_dirPath + "/" + img_name));//上传
+                            Image sendimg = net.mamoe.mirai.contact.Contact.uploadImage(bot.getGroup(475379747), new FileInputStream(tmd_dirPath + "/twitter_media_download/" + img_name));//上传
                             chain.append(sendimg);
                         }
                         //img.renameTo(new File("/root/Mirai/Haneki/twitter_img/" + img_name));
@@ -222,7 +222,7 @@ public class Discord2Mirai extends ListenerAdapter {
                     System.out.println("[tmd抓取]->" + tmd_command);
                     pro.waitFor();
                     System.out.println("[tmd抓取结束]");
-                    File dir = new File(tmd_dirPath);
+                    File dir = new File(tmd_dirPath + "/twitter_media_download");
                     File[] files = dir.listFiles();
                     for (File img:files) {
                         String img_name = img.getName();
