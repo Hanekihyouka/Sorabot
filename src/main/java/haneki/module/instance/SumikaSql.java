@@ -16,8 +16,8 @@ public class SumikaSql extends BasicModule implements MessageModule {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/data_oj";
-    static final String USER = "quest";
-    static final String PASS = "SumikaSystem";
+    static final String USER = "guest";
+    static final String PASS = "Sumika!System2";
     Connection conn = null;
     Statement stmt = null;
 
