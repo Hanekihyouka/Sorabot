@@ -32,7 +32,7 @@ public class Discord2Mirai extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        String tmd_command = "python3 " + "tmd_dirPath" + "/twitter-media-downloader.py url";
+        String tmd_command = "python3 " + tmd_dirPath + "/twitter-media-downloader.py url";
         if (event.getAuthor().isBot()){
             System.out.println("来自Discord的消息>[Furitbat Factory Community Server #announcements]\n");
         }

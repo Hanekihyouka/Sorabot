@@ -22,8 +22,8 @@ public class Mixer extends BasicModule implements MessageModule {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/data_oj";
-    static final String USER = "quest";
-    static final String PASS = "SumikaSystem";
+    static final String USER = "guest";
+    static final String PASS = "Sumika!System2";
 
     static final String MIXER_NAME[] = {"空袭","增幅","返回","炸弹","恩惠","混乱","冰冻","布雷","奇迹","随机传送",
             "恢复","疾走","宝箱","BOSS HP+10","追星者","乞丐","玩家ATK+1","玩家DEF+1","玩家EVD+1","爆燃",
