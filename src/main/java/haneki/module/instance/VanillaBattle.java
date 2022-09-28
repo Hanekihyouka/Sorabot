@@ -46,7 +46,7 @@ public class VanillaBattle extends BasicModule implements MessageModule {
                 isRunning = true;
                 String[] content = message.contentToString().substring(1).split(" ");
                 String[] execCommand = new String[content.length+1];
-                execCommand[0] = "/home/nishina/project/mirai/ethene/data/vanilla/vanilla";
+                execCommand[0] = "/home/haneki/Projects/mirai/data/vanilla/vanilla";
                 for (int i = 0; i < content.length; i++) {
                     execCommand[i+1] = content[i];
                 }

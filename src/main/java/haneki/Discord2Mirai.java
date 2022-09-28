@@ -159,7 +159,6 @@ public class Discord2Mirai extends ListenerAdapter {
                             Image sendimg = net.mamoe.mirai.contact.Contact.uploadImage(bot.getGroup(475379747), new FileInputStream(tmd_dirPath + "/twitter_media_download/" + img_name));//上传
                             chain.append(sendimg);
                         }
-                        //img.renameTo(new File("/root/Mirai/Haneki/twitter_img/" + img_name));
                         img.renameTo(new File(galleryPath + "/" + img_name));
                     }
 
