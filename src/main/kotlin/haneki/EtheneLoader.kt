@@ -43,7 +43,7 @@ suspend fun main() {
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        //protocol = BotConfiguration.MiraiProtocol.IPAD //忍冬
+        protocol = BotConfiguration.MiraiProtocol.IPAD //忍冬
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()
