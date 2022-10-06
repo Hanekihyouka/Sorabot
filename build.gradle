@@ -9,7 +9,7 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.5.10'//1.5.31 ?
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'//1.5.10 ?
     id 'com.github.johnrengelman.shadow' version '6.1.0'//使用shadow对依赖进行打包
 }
 
@@ -17,7 +17,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 group 'haneki'
-version '2.12.3'
+version '2.13.0-RC'
 
 sourceCompatibility = 1.8
 
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.mamoe:mirai-core:2.12.3'
+    implementation 'net.mamoe:mirai-core:2.13.0-RC'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
