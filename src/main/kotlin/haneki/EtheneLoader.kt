@@ -102,7 +102,9 @@ fun Bot.messageDSL(){
     }
 
     this.eventChannel.subscribeMessages {
-
+        Regex("(.|\r|\n)*:.*?:(.|\r|\n).*")matching{
+            System.out.println("[RegexTest] Done!")
+        }
 
         Regex("(?i).?.?help")matching{
             subject.sendMessage("SoraBot使用指南>\n" +
@@ -713,7 +715,8 @@ fun loadModule(){
     moduleLoader.moduleList.put(deck.module_name,deck)
     var gelbooru = Gelbooru("Gelbooru")
     moduleLoader.moduleList.put(gelbooru.module_name,gelbooru)
-
+    var emote = SumikaSqlEmote("Emote")
+    moduleLoader.moduleList.put(emote.module_name,emote)
 }
 
 /**
