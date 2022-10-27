@@ -102,9 +102,7 @@ fun Bot.messageDSL(){
     }
 
     this.eventChannel.subscribeMessages {
-        Regex("(.|\r|\n)*:.*?:(.|\r|\n).*")matching{
-            System.out.println("[RegexTest] Done!")
-        }
+        // Regex("(.|\r|\n)*:.*?:(.|\r|\n).*")matching{ System.out.println("[RegexTest] Done!") }
 
         Regex("(?i).?.?help")matching{
             subject.sendMessage("SoraBot使用指南>\n" +

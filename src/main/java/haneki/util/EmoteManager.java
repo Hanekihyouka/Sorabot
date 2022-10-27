@@ -5,20 +5,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Date;
+import java.util.HashSet;
 
-public class CombineEmote {
+public class EmoteManager {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/data_oj";
     static final String USER = "guest";
     static final String PASS = "Sumika!System2";
     Connection conn = null;
     Statement stmt = null;
-
     public String generator(String[] content){
         return write(combine(content));
     }
@@ -34,35 +31,41 @@ public class CombineEmote {
     }
 
     public File getImageByName(String emoteKey){
-        String emoteFilePath = "./data/";
-        if (emoteKey.contains("\r")|emoteKey.contains("\n")){
-            return new File("./data/empty64.png");
-        } else if (emoteKey.matches("[ _]*")) {
-            return new File("./data/empty64.png");
-        }
-        try {
-            Class.forName(JDBC_DRIVER);
-            System.out.println("[SD]连接数据库...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("[SD]实例化Statement对象...");
-            stmt = conn.createStatement();
-            String sql = "select largeFile,smallFile from emote where emoteKey = '" + emoteKey + "';";
-            ResultSet rs = stmt.executeQuery(sql);
-            if (rs.next()){
-                if (rs.getString("largeFile").equals("null")){
-                    emoteFilePath += "emote/" + rs.getString("smallFile");
-                }else {
-                    emoteFilePath += "emote/" + rs.getString("largeFile");
-                }
-            }else {
-                emoteFilePath += "empty64.png";
+        String emoteFilePath = "./data/.emote/" + emoteKey;
+        File f = new File(emoteFilePath);
+        if (f.exists()){
+            return f;
+        }else {
+            emoteFilePath = "./data/";
+            if (emoteKey.contains("\r")|emoteKey.contains("\n")){
+                return new File("./data/empty64.png");
+            } else if (emoteKey.matches("[ _]*")) {
+                return new File("./data/empty64.png");
             }
-            rs.close();
-            conn.close();
-            stmt.close();
-            return new File(emoteFilePath);
-        }catch (Exception e){
-            return new File("./data/empty64.png");
+            try {
+                Class.forName(JDBC_DRIVER);
+                System.out.println("[Emote]连接数据库...");
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                System.out.println("[Emote]实例化Statement对象...");
+                stmt = conn.createStatement();
+                String sql = "select largeFile,smallFile from emote where emoteKey = '" + emoteKey + "';";
+                ResultSet rs = stmt.executeQuery(sql);
+                if (rs.next()){
+                    if (rs.getString("largeFile").equals("null")|rs.getString("largeFile").isEmpty()){
+                        emoteFilePath += "emote/" + rs.getString("smallFile");
+                    }else {
+                        emoteFilePath += "emote/" + rs.getString("largeFile");
+                    }
+                }else {
+                    emoteFilePath += "empty64.png";
+                }
+                rs.close();
+                conn.close();
+                stmt.close();
+                return new File(emoteFilePath);
+            }catch (Exception e){
+                return new File("./data/empty64.png");
+            }
         }
     }
     public BufferedImage combine(String[] content){
@@ -84,6 +87,8 @@ public class CombineEmote {
                 sizeW = indexW;
             }
         }
+        if (sizeH>32){sizeH=32;}
+        if (sizeW>32){sizeW=32;}
         BufferedImage bufferedImage = new BufferedImage(64*sizeW,64*sizeH,BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D graphics2D = bufferedImage.createGraphics();
         int x = 0;
@@ -101,7 +106,7 @@ public class CombineEmote {
                 continue;
             }else {
                 try {
-                    graphics2D.drawImage(ImageIO.read(getImageByName(content[indexC])),x*64,y*64,64,64,null);
+                    graphics2D.drawImage(ImageIO.read(getImageByName(content[indexC])).getScaledInstance(64,64,Image.SCALE_FAST),x*64,y*64,64,64,null);
                     x++;
                 }catch (IOException ignored){}
             }
@@ -110,6 +115,5 @@ public class CombineEmote {
         graphics2D.dispose();
         return bufferedImage;
     }
-
 
 }
