@@ -101,6 +101,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                 default:
                     String steam64id = null;
                     String url = URL_HEADER;
+                    int renderTyper = 0;
                     if (params[1].equalsIgnoreCase("me")){
                         try {
                             Class.forName(JDBC_DRIVER);
@@ -108,10 +109,11 @@ public class WebGetStat extends BasicModule implements MessageModule {
                             conn = DriverManager.getConnection(DB_URL, USER, PASS);
                             System.out.println("[SD]实例化Statement对象...");
                             stmt = conn.createStatement();
-                            String sql = "select steam64id from steamInfo where qq = '" + messageEvent.getSender().getId() + "';";
+                            String sql = "select steam64id,renderType from steamInfo where qq = '" + messageEvent.getSender().getId() + "';";
                             ResultSet rs = stmt.executeQuery(sql);
                             if (rs.next()){
                                 steam64id = rs.getString("steam64id");
+                                renderTyper = rs.getInt("renderType");
                             }else {
                                 messageChainBuilder.append("在数据库中查找你的信息失败。\n如果你还没有绑定过id，使用[#stat bind [steam64id]]来进行绑定。");
                                 return messageChainBuilder.build();
@@ -135,7 +137,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         messageChainBuilder.append("这不是一个有效的steam64id。它应该是以7656开头、总长度为17位的纯数字。\n如果你不知道什么是steam64id，推荐在网络上了解更多的相关知识。\n");
                         return messageChainBuilder.build();
                     }
-                    url = url + steam64id;
+                    url = url + steam64id + "&render=" + renderTyper ;
                     if (params.length==3){//limit
                         url = url + "&limit=" + params[2];
                     }
