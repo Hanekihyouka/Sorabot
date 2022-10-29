@@ -9,11 +9,9 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.*;
 import net.mamoe.mirai.utils.ExternalResource;
 
-import javax.imageio.ImageIO;
+
 import java.io.File;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
+
 
 public class SumikaSqlEmote extends BasicModule implements MessageModule {
     public SumikaSqlEmote(String module_name) {

@@ -22,7 +22,7 @@ public class RegexReply extends BasicModule implements NeedOperactor {
     static final String USER = "sora";
     static final String PASS = "***REMOVED***";
     Connection conn = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     ArrayList<Integer> replyID = new ArrayList<Integer>();
     ArrayList<String> replyRegex = new ArrayList<>();
     ArrayList<String> replyContent = new ArrayList<>();//序列化后的jsonStr
@@ -143,9 +143,9 @@ public class RegexReply extends BasicModule implements NeedOperactor {
             System.out.println("[RegexReply]连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("[RegexReply]实例化Statement对象...");
-            stmt = conn.createStatement();
             String sql = "select id,regex,content from regexReply order by id;";
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             int count = 0;
             while (rs.next()){
                 replyID.add(rs.getInt("id"));
@@ -169,9 +169,11 @@ public class RegexReply extends BasicModule implements NeedOperactor {
             System.out.println("[RegexReply]连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("[RegexReply]实例化Statement对象...");
-            stmt = conn.createStatement();
-            String sql = "insert into regexReply (regex,content) value('" + regex + "','" + content + "');";
-            stmt.execute(sql);
+            String sql = "insert into regexReply (regex,content) value(?,?);";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1,regex);
+            stmt.setString(2,content);
+            stmt.executeUpdate();
             stmt.close();
             conn.close();
             return true;
@@ -189,9 +191,10 @@ public class RegexReply extends BasicModule implements NeedOperactor {
             System.out.println("[RegexReply]连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("[RegexReply]实例化Statement对象...");
-            stmt = conn.createStatement();
-            String sql = "delete from regexReply where id = " + id + " ;";
-            stmt.execute(sql);
+            String sql = "delete from regexReply where id = ? ;";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,id);
+            stmt.executeUpdate();
             stmt.close();
             conn.close();
             return true;
@@ -210,8 +213,8 @@ public class RegexReply extends BasicModule implements NeedOperactor {
             System.out.println("[RegexReply]连接数据库...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("[RegexReply]实例化Statement对象...");
-            stmt = conn.createStatement();
             String sql = "select id,regex from regexReply;";
+            stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 result += "\n" + rs.getInt("id") + "\t" + rs.getString("regex");

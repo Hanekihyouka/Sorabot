@@ -20,7 +20,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
     static final String USER = "sora";
     static final String PASS = "***REMOVED***";
     Connection conn = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
 
     public WebGetStat(String module_name) {
         super(module_name);
@@ -52,9 +52,12 @@ public class WebGetStat extends BasicModule implements MessageModule {
                                 System.out.println("[SD]连接数据库...");
                                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
                                 System.out.println("[SD]实例化Statement对象...");
-                                stmt = conn.createStatement();
-                                String sql = "insert into steamInfo(qq,steam64id) value('" + messageEvent.getSender().getId() + "','" + params[2] + "') on duplicate key update steam64id = '" + params[2] + "';";
-                                stmt.execute(sql);
+                                String sql = "insert into steamInfo(qq,steam64id) value(?,?) on duplicate key update steam64id = ?;";
+                                stmt = conn.prepareStatement(sql);
+                                stmt.setLong(1,messageEvent.getSender().getId());
+                                stmt.setString(2, params[2]);
+                                stmt.setString(3, params[2]);
+                                stmt.executeUpdate();
                                 conn.close();
                                 stmt.close();
                                 messageChainBuilder.append("绑定成功！你现在可以直接使用[#stat me [行数。可不填,默认为5]]来生成对应的统计图片。" +
@@ -81,9 +84,10 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         System.out.println("[SD]连接数据库...");
                         conn = DriverManager.getConnection(DB_URL, USER, PASS);
                         System.out.println("[SD]实例化Statement对象...");
-                        stmt = conn.createStatement();
-                        String sql = "delete from steamInfo where qq = '" + messageEvent.getSender().getId() + "';";
-                        stmt.execute(sql);
+                        String sql = "delete from steamInfo where qq = ?;";
+                        stmt = conn.prepareStatement(sql);
+                        stmt.setLong(1,messageEvent.getSender().getId());
+                        stmt.executeUpdate();
                         conn.close();
                         stmt.close();
                         messageChainBuilder.append("删除成功！");
@@ -98,6 +102,32 @@ public class WebGetStat extends BasicModule implements MessageModule {
                      * 绷。
                      *
                      * **/
+                case "type":
+                case "-t":
+                    if (params.length==2){
+                        messageChainBuilder.append("请指定类型。");
+                        return messageChainBuilder.build();
+                    }else {
+                        try {
+                            Class.forName(JDBC_DRIVER);
+                            System.out.println("[SD]连接数据库...");
+                            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                            System.out.println("[SD]实例化Statement对象...");
+                            String sql = "update steamInfo set renderType = ? where qq = ?;";
+                            stmt = conn.prepareStatement(sql);
+                            stmt.setInt(1, Integer.parseInt(params[2]));
+                            stmt.setLong(2,messageEvent.getSender().getId());
+                            stmt.executeUpdate();
+                            conn.close();
+                            stmt.close();
+                        }catch (SQLException | ClassNotFoundException e){
+                            messageChainBuilder.append("JDBC错误。\n在数据库中查找你的信息失败。\n如果你还没有绑定过id，使用[#stat bind [steam64id]]来进行绑定。");
+                            e.printStackTrace();
+                            return messageChainBuilder.build();
+                        }
+                        messageChainBuilder.append("Done.");
+                        return messageChainBuilder.build();
+                    }
                 default:
                     String steam64id = null;
                     String url = URL_HEADER;
@@ -108,9 +138,10 @@ public class WebGetStat extends BasicModule implements MessageModule {
                             System.out.println("[SD]连接数据库...");
                             conn = DriverManager.getConnection(DB_URL, USER, PASS);
                             System.out.println("[SD]实例化Statement对象...");
-                            stmt = conn.createStatement();
-                            String sql = "select steam64id,renderType from steamInfo where qq = '" + messageEvent.getSender().getId() + "';";
-                            ResultSet rs = stmt.executeQuery(sql);
+                            String sql = "select steam64id,renderType from steamInfo where qq = ?;";
+                            stmt = conn.prepareStatement(sql);
+                            stmt.setLong(1,messageEvent.getSender().getId());
+                            ResultSet rs = stmt.executeQuery();
                             if (rs.next()){
                                 steam64id = rs.getString("steam64id");
                                 renderTyper = rs.getInt("renderType");

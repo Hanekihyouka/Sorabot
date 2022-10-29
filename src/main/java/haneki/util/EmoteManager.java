@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Date;
-import java.util.HashSet;
+
 
 public class EmoteManager {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -15,7 +15,7 @@ public class EmoteManager {
     static final String USER = "guest";
     static final String PASS = "Sumika!System2";
     Connection conn = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     public String generator(String[] content){
         return write(combine(content));
     }
@@ -47,9 +47,10 @@ public class EmoteManager {
                 System.out.println("[Emote]连接数据库...");
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 System.out.println("[Emote]实例化Statement对象...");
-                stmt = conn.createStatement();
-                String sql = "select largeFile,smallFile from emote where emoteKey = '" + emoteKey + "';";
-                ResultSet rs = stmt.executeQuery(sql);
+                String sql = "select largeFile,smallFile from emote where emoteKey = ?;";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1,emoteKey);
+                ResultSet rs = stmt.executeQuery();
                 if (rs.next()){
                     if (rs.getString("largeFile").equals("null")|rs.getString("largeFile").isEmpty()){
                         emoteFilePath += "emote/" + rs.getString("smallFile");
