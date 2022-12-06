@@ -715,6 +715,8 @@ fun loadModule(){
     moduleLoader.moduleList.put(gelbooru.module_name,gelbooru)
     var emote = SumikaSqlEmote("Emote")
     moduleLoader.moduleList.put(emote.module_name,emote)
+    var mcmod = Mcmod("Mcmod")
+    moduleLoader.moduleList.put(mcmod.module_name,mcmod)
 }
 
 /**

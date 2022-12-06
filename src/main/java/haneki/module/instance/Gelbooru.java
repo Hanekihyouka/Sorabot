@@ -46,7 +46,7 @@ public class Gelbooru extends BasicModule implements MessageModule {
                             booruImageInfo = HtmlSoup.getBooruImagebyUrl("https://100oj.booru.org/index.php?page=post&s=view&id=" + params[1]);
                         }else {
                             booruImageInfo.setId(params[1]);
-                            booruImageInfo.setImage_url("http://interface.oranges.wang/common/data/emotes/fr_mpoppo00_large.png");
+                            booruImageInfo.setImage_url("http://interface.100oj.com/common/data/emotes/fr_mpoppo00_large.png");
                             booruImageInfo.setRating("R 18");
                         }
                         break;
@@ -54,7 +54,7 @@ public class Gelbooru extends BasicModule implements MessageModule {
 
                 Group group = bot.getGroup(205312025L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
-                String booruImageUrl = "http://interface.oranges.wang/common/data/emotes/fr_mpoppo00_large.png";
+                String booruImageUrl = "http://interface.100oj.com/common/data/emotes/fr_mpoppo00_large.png";
                 if (booruImageInfo.getRating().equals("e")){
                     forwardMessageBuilder.add(bot.getId(),"booru",new PlainText("此图片分级为 Explicit，查看请直接根据[id]前往图库访问。"));
                 }else{
