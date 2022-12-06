@@ -61,10 +61,10 @@ public class HtmlSoup {
             String[][] results = new String[limit][2];
             for (int i = 0; i < limit; i++) {
                 Element dataElement = dataElements.get(i).getElementsByClass("head").first();
-                System.out.println("======>>");
-                System.out.println(dataElement.toString());
-                System.out.println("<<======");
                 Element result = dataElement.selectFirst("a[href^=http]");
+                if (result==null){
+                    result = dataElement.getElementsByTag("a").first();
+                }
                 String resultName = result.text();
                 String resultURL = result.attr("href");
                 results[i][0] = resultName;
@@ -83,7 +83,12 @@ public class HtmlSoup {
         String pattern = "https://www\\.mcmod\\.cn/(\\w+?)/[0-9]{1,9}.html";
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(pageUrl);
-        m.matches();
+        if (!m.matches()){
+            mcmodDataInfo.setTitle("非资料。");
+            mcmodDataInfo.setContent("非资料。");
+            mcmodDataInfo.setIconURL("https://www.mcmod.cn/images/logo.gif");
+            return mcmodDataInfo;
+        }
         String dataType = m.group(1);
         switch (dataType){
             case "class":

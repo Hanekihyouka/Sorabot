@@ -10,17 +10,12 @@ import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.message.data.*;
 import net.mamoe.mirai.utils.ExternalResource;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Mcmod extends BasicModule implements MessageModule {
 
     public Mcmod(String module_name) {
-        super("mcmod");
+        super(module_name);
     }
 
     @Override
