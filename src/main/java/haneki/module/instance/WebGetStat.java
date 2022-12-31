@@ -132,19 +132,21 @@ public class WebGetStat extends BasicModule implements MessageModule {
                     String steam64id = null;
                     String url = URL_HEADER;
                     int renderTyper = 0;
+                    int sp1 = 0;
                     if (params[1].equalsIgnoreCase("me")){
                         try {
                             Class.forName(JDBC_DRIVER);
                             System.out.println("[SD]连接数据库...");
                             conn = DriverManager.getConnection(DB_URL, USER, PASS);
                             System.out.println("[SD]实例化Statement对象...");
-                            String sql = "select steam64id,renderType from steamInfo where qq = ?;";
+                            String sql = "select steam64id,renderType,sp1 from steamInfo where qq = ?;";
                             stmt = conn.prepareStatement(sql);
                             stmt.setLong(1,messageEvent.getSender().getId());
                             ResultSet rs = stmt.executeQuery();
                             if (rs.next()){
                                 steam64id = rs.getString("steam64id");
                                 renderTyper = rs.getInt("renderType");
+                                sp1 = rs.getInt("sp1");
                             }else {
                                 messageChainBuilder.append("在数据库中查找你的信息失败。\n如果你还没有绑定过id，使用[#stat bind [steam64id]]来进行绑定。");
                                 return messageChainBuilder.build();
@@ -168,7 +170,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         messageChainBuilder.append("这不是一个有效的steam64id。它应该是以7656开头、总长度为17位的纯数字。\n如果你不知道什么是steam64id，推荐在网络上了解更多的相关知识。\n");
                         return messageChainBuilder.build();
                     }
-                    url = url + steam64id + "&render=" + renderTyper ;
+                    url = url + steam64id + "&render=" + renderTyper + "&sp1=" + sp1;
                     if (params.length==3){//limit
                         url = url + "&limit=" + params[2];
                     }
@@ -179,7 +181,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         messageChainBuilder.append(img);
                         return messageChainBuilder.build();
                     }catch (Exception ignored){
-                        messageChainBuilder.append("生成失败！可能原因>\n1>网络原因，本机无法连接至steam。\n2>请将你的steam->编辑个人资料->隐私设置->游戏详情，设置为公开|所有人可见。");
+                        messageChainBuilder.append("生成失败！可能原因>\n1>网络原因，本机无法连接至steam。\n2>请将你的steam->编辑个人资料->隐私设置->游戏详情，设置为公开|所有人可见。(该设置有一定的延迟。)");
                         return messageChainBuilder.build();
                     }
             }
@@ -190,7 +192,8 @@ public class WebGetStat extends BasicModule implements MessageModule {
                     "#stat [steam64id] [行数。可不填，默认为5]\n" +
                     "#stat bind [steam64id]    用于将当前qq绑定到对应steam账户。重复使用会更新绑定。\n" +
                     "#stat unbind    删除自己的绑定。\n" +
-                    "#stat me [行数。可不填，默认为5]   在qq绑定steam64id后，使用本命令来快速生成自己的资料。");
+                    "#stat me [行数。可不填，默认为5]   在qq绑定steam64id后，使用本命令来快速生成自己的资料。" +
+                    "#stat type [类型编号]   更改出图类型。");
             return messageChainBuilder.build();
         }
     }
