@@ -180,7 +180,7 @@ public class Discord2Mirai extends ListenerAdapter {
             for (int i = 0;m.find(); i++) {
                 ExternalResource ex = null;
                 try {
-                    ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte("http://pximg.rainchan.win/img?img_id=" + m.group(1)));
+                    ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte("https://px2.rainchan.win/img/regular/" + m.group(1)));
                     Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                     //添加图片
                     chain.append(img);
@@ -248,7 +248,7 @@ public class Discord2Mirai extends ListenerAdapter {
             m = r.matcher(content);
             for (int i = 0;m.find(); i++) {
                 hasPixiv = true;
-                chain.append("http://pximg.rainchan.win/img?img_id=" + m.group(1) + "\n");
+                chain.append("https://px2.rainchan.win/img/regular/" + m.group(1) + "\n");
             }
 
             if (hasPixiv | hasTwitter){
