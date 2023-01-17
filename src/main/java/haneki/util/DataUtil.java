@@ -1,6 +1,8 @@
 package haneki.util;
 
 import java.io.*;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,5 +44,19 @@ public class DataUtil {
         return true;
     }
 
-
+    public static String readRandomLine(File f) {
+        String result = null;
+        Random rand = new Random();
+        int n = 0;
+        try {
+            for(Scanner sc = new Scanner(f); sc.hasNext(); ) {
+                ++n;
+                String line = sc.nextLine();
+                System.out.println("n: "+n+" line: "+line);
+                if(rand.nextInt(n) == 0)
+                    result = line;
+            }
+        }catch (FileNotFoundException ignored){}
+        return result;
+    }
 }

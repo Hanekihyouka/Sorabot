@@ -17,6 +17,7 @@ import java.io.File;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 
@@ -35,7 +36,7 @@ public class Le extends BasicModule implements MessageModule {
             "超能模式！","永久流放","修罗场模式","玩偶使","白色圣诞大粉碎","赌博！","涡轮满载","×16大火箭","大爆炸铃","脱衣",
             "隐身启动","劲敌","杀戮魔法","神出鬼没","兽之魔女","不动之物体","艾莉的奇迹","爆燃！","自爆","火箭炮",
             "大火箭炮","乔纳桑·速袭","另一个最终兵器","露露的幸运蛋","星球的导火线","才气觉醒","水晶障壁","统治者","急速的亚莉希安罗妮","圣露眼",
-            "拜托了厨师长！","升档","炽热的商人之魂","月夜之舞","社交界亮相","黄昏色的梦","小麦格农炮","梦寐以求的世界","星星收集者"};
+            "拜托了厨师长！","升档","炽热的商人之魂","月夜之舞","社交界亮相","黄昏色的梦","小麦格农炮","梦寐以求的世界","星星收集者","甜点天堂","甜点制作者的魔法","甜点成堆大作战"};
     String deckList[] = {"冲刺！","纱季的曲奇","迁怒于人","远距离射击","美妙的叮铃铃","美妙的礼物","坚固的结晶","布丁","残机奖励","大小姐的特权",
             "孤独的暴走车","偷袭","探究心","学生会长的权益","模仿","成功报酬","绅士的决斗","宝物小偷","拦路者","甜点的破坏者",
             "幕后交易","加班","燃起来吧！","兔子浮游炮","虹色之环","大麦格农炮","护盾","最终决战","性格反转力场","敌前逃亡",
@@ -60,12 +61,13 @@ public class Le extends BasicModule implements MessageModule {
 
     @Override
     public String getTiggerRegex() {
-        return "(?i)#(le|乐|mw|奇迹漫步|7|浮游炮|塔罗牌?|tarots?)";
+        return ".*";
     }
 
     @Override
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
-        switch (message.contentToString().toLowerCase()){
+        String lower = message.contentToString().toLowerCase();
+        switch (lower){
             case "#塔罗牌":
             case "#塔罗":
             case "#tarot":
@@ -80,6 +82,14 @@ public class Le extends BasicModule implements MessageModule {
             case "#7":
             case "#浮游炮":
                 return leNanako();
+            case "##le_say":
+                return leSay();
+            default:
+                if (!lower.startsWith("#")){
+                    if (Math.random()>0.99){
+                        return leSay();
+                    }
+                }
         }
         return null;
     }
@@ -204,6 +214,21 @@ public class Le extends BasicModule implements MessageModule {
         }
         messageChainBuilder.append("[浮游炮]分配结果:\n" +
                 "+(" + bit7[0] + " " + bit7[1] + " " + bit7[2] + ")");
+        return messageChainBuilder.build();
+    }
+
+    public MessageChain leSay(){
+        MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
+        File cvDir = new File("./data/le/cv/");
+        File[] cvFileList = cvDir.listFiles();
+        int cvFileIndex = (int) (Math.random()*cvFileList.length);
+        String cvContent = "";
+        String cvFileName = cvFileList[cvFileIndex].getName();
+        while (!cvContent.startsWith("<")){
+            cvContent = DataUtil.readRandomLine(cvFileList[cvFileIndex]);
+        }
+        cvContent = cvContent.substring(7).replace("\\n","\n");
+        messageChainBuilder.append("「" + cvContent + "」\n— " + cvFileName.substring(11,cvFileName.length()-4));
         return messageChainBuilder.build();
     }
 }
