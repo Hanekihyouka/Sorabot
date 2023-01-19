@@ -17,7 +17,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 group 'haneki'
-version '2.13.0-RC2'
+version '2.14.0-RC'
 
 sourceCompatibility = 1.8
 
@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.mamoe:mirai-core:2.13.0-RC2'
+    implementation 'net.mamoe:mirai-core:2.14.0-RC'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 

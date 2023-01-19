@@ -227,7 +227,8 @@ public class Le extends BasicModule implements MessageModule {
         while (!cvContent.startsWith("<")){
             cvContent = DataUtil.readRandomLine(cvFileList[cvFileIndex]);
         }
-        cvContent = cvContent.substring(7).replace("\\n","\n");
+        cvContent = cvContent.replaceAll("<[0-9]{3,4}> ","");
+        cvContent = cvContent.replace("\\n","\n");
         messageChainBuilder.append("「" + cvContent + "」\n— " + cvFileName.substring(11,cvFileName.length()-4));
         return messageChainBuilder.build();
     }
