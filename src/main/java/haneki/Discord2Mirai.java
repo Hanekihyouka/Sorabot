@@ -100,6 +100,7 @@ public class Discord2Mirai extends ListenerAdapter {
                         ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(m.group(3)));
                     }
                     Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
+                    ex.close();
                     //添加本段图片
                     chain.append(img);
                 } catch (Exception e) {
@@ -122,6 +123,7 @@ public class Discord2Mirai extends ListenerAdapter {
                     try {
                         ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(attachment.getUrl()));
                         Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
+                        ex.close();
                         //添加图片
                         chain.append(img);
                     } catch (Exception e) {
@@ -158,6 +160,15 @@ public class Discord2Mirai extends ListenerAdapter {
                         if (img_name.endsWith(".jpg")|img_name.endsWith(".png")|img_name.endsWith(".jpeg")|img_name.endsWith(".gif")){
                             Image sendimg = net.mamoe.mirai.contact.Contact.uploadImage(bot.getGroup(475379747), new FileInputStream(tmd_dirPath + "/twitter_media_download/" + img_name));//上传
                             chain.append(sendimg);
+                        }else if (img_name.endsWith(".mp4")){
+                            // twitter gif
+                            ExternalResource gif = ExternalResource.create(img);
+                            bot.getGroup(475379747).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//纸箱
+                            if (toOJGroup){
+                                bot.getGroup(223667456).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//佳
+                                bot.getGroup(572808546).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//小店
+                            }
+                            gif.close();
                         }
                         img.renameTo(new File(galleryPath + "/" + img_name));
                     }
@@ -182,6 +193,7 @@ public class Discord2Mirai extends ListenerAdapter {
                 try {
                     ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte("https://px2.rainchan.win/img/regular/" + m.group(1)));
                     Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
+                    ex.close();
                     //添加图片
                     chain.append(img);
                 } catch (Exception e) {
