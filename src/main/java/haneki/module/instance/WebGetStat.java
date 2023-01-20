@@ -133,7 +133,31 @@ public class WebGetStat extends BasicModule implements MessageModule {
                     String url = URL_HEADER;
                     int renderTyper = 0;
                     int sp1 = 0;
-                    if (params[1].equalsIgnoreCase("me")){
+                    if (params[1].startsWith("@")){
+                        try{
+                            Class.forName(JDBC_DRIVER);
+                            System.out.println("[SD]连接数据库...");
+                            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                            System.out.println("[SD]实例化Statement对象...");
+                            String sql = "select steam64id,sp1 from steamInfo where qq = ?;";
+                            stmt = conn.prepareStatement(sql);
+                            stmt.setString(1,params[1].substring(1));
+                            ResultSet rs = stmt.executeQuery();
+                            if (rs.next()){
+                                steam64id = rs.getString("steam64id");
+                                sp1 = rs.getInt("sp1");
+                            }else {
+                                messageChainBuilder.append("在数据库中查找该玩家的信息失败。\n该玩家没有对 qq 和 steam64id 进行绑定。");
+                                return messageChainBuilder.build();
+                            }
+                            rs.close();
+                            conn.close();
+                            stmt.close();
+                        } catch (SQLException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (params[1].equalsIgnoreCase("me")){
                         try {
                             Class.forName(JDBC_DRIVER);
                             System.out.println("[SD]连接数据库...");
@@ -199,7 +223,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         messageChainBuilder.append(img);
                         return messageChainBuilder.build();
                     }catch (Exception ignored){
-                        messageChainBuilder.append("生成失败！可能原因>\n1>网络原因，本机无法连接至steam。\n2>请将你的steam->编辑个人资料->隐私设置->游戏详情，设置为公开|所有人可见。(该设置有一定的延迟。)");
+                        messageChainBuilder.append("生成失败！可能原因>\n1>网络原因，本机无法连接至steam。\n2>请将steam->编辑个人资料->隐私设置->游戏详情，设置为公开|所有人可见。(该设置有一定的延迟。)");
                         return messageChainBuilder.build();
                     }
             }
