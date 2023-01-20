@@ -166,6 +166,24 @@ public class WebGetStat extends BasicModule implements MessageModule {
                         }
                     }else if (DataUtil.isSteam64id(params[1])){
                         steam64id = params[1];
+                        try{
+                            Class.forName(JDBC_DRIVER);
+                            System.out.println("[SD]连接数据库...");
+                            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                            System.out.println("[SD]实例化Statement对象...");
+                            String sql = "select sp1 from steamInfo where steam64id = ?;";
+                            stmt = conn.prepareStatement(sql);
+                            stmt.setString(1,steam64id);
+                            ResultSet rs = stmt.executeQuery();
+                            if (rs.next()){
+                                sp1 = rs.getInt("sp1");
+                            }
+                            rs.close();
+                            conn.close();
+                            stmt.close();
+                        } catch (SQLException | ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
                     }else {
                         messageChainBuilder.append("这不是一个有效的steam64id。它应该是以7656开头、总长度为17位的纯数字。\n如果你不知道什么是steam64id，推荐在网络上了解更多的相关知识。\n");
                         return messageChainBuilder.build();
