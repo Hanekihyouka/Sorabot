@@ -717,6 +717,8 @@ fun loadModule(){
     moduleLoader.moduleList.put(emote.module_name,emote)
     var mcmod = Mcmod("Mcmod")
     moduleLoader.moduleList.put(mcmod.module_name,mcmod)
+    var abutton = BigRedButton("AB起爆器")
+    moduleLoader.moduleList.put(abutton.module_name,abutton)
 }
 
 /**
