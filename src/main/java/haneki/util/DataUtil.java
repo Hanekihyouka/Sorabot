@@ -52,7 +52,7 @@ public class DataUtil {
             for(Scanner sc = new Scanner(f); sc.hasNext(); ) {
                 ++n;
                 String line = sc.nextLine();
-                System.out.println("n: "+n+" line: "+line);
+                // System.out.println("n: "+n+" line: "+line);
                 if(rand.nextInt(n) == 0)
                     result = line;
             }
