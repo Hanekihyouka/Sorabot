@@ -22,9 +22,9 @@ public class Mixer extends BasicModule implements MessageModule {
     static final String USER = "guest";
     static final String PASS = "Sumika!System2";
 
-    static final String MIXER_NAME[] = {"空袭","增幅","返回","炸弹","恩惠","混乱","冰冻","布雷","奇迹","随机传送",
-            "恢复","疾走","宝箱","BOSS HP+10","追星者","乞丐","玩家ATK+1","玩家DEF+1","玩家EVD+1","爆燃",
-            "翻转","BOSS ATK+1","BOSS DEF+1","BOSS EVD+1","鬼牌","破产","粘液","孢子"," - "};//算上none共29个
+    static final String MIXER_NAME[] = {"[空袭]","[增幅]","[返回]","[炸弹]","恩惠","{混乱}","[冰冻]","{布雷}","奇迹","{随机传送}",
+            "恢复","[疾走]","宝箱","{BOSS HP+10}","追星者","{乞丐}","玩家ATK+1","玩家DEF+1","玩家EVD+1","[爆燃]",
+            "[翻转]","{BOSS ATK+1}","{BOSS DEF+1}","{BOSS EVD+1}","鬼牌","{破产}","{粘液}","[孢子]"," - "};//算上none共29个
     //none的index为-1
 
     public Mixer(String module_name) {
@@ -92,9 +92,14 @@ public class Mixer extends BasicModule implements MessageModule {
                 String mixer1 = MIXER_NAME[rs.getInt("mixer1")];
                 String mixer2 = MIXER_NAME[rs.getInt("mixer2")];
                 String mixer3 = MIXER_NAME[rs.getInt("mixer3")];
+                int modifier = 0;
+                if (mixer1.contains("[")){ modifier += 10;} else if (mixer1.contains("{")) { modifier += 25;}
+                if (mixer2.contains("[")){ modifier += 10;} else if (mixer2.contains("{")) { modifier += 25;}
+                if (mixer3.contains("[")){ modifier += 10;} else if (mixer3.contains("{")) { modifier += 25;}
                 pt.append(sd);
-                if (textIndex==tagNow){pt.append("(当前)");}
-                pt.append("\t").append(mixer1).append("\t").append(mixer2).append("\t").append(mixer3).append("\n");
+                pt.append("  +" + modifier + "%");
+                if (textIndex==tagNow){pt.append("  (当前)\n");}else {pt.append("\n");}
+                pt.append(mixer1).append("  ").append(mixer2).append("  ").append(mixer3).append("\n");
                 if (textIndex%20==0){
                     forwardMessageBuilder.add(bot.getId(),"混合器",new PlainText(pt.toString()));
                     pt.delete(0,pt.length());//清空
