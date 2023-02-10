@@ -84,8 +84,10 @@ public class Le extends BasicModule implements MessageModule {
             case "##le_say":
                 return leSay();
             default:
-                if (!lower.startsWith("#")){
-                    if (Math.random()>0.99){
+                if ((!lower.startsWith("#"))
+                        &&(!lower.startsWith("."))
+                        &&(!lower.startsWith("。"))){
+                    if (Math.random()>0.995){
                         return leSay();
                     }
                 }

@@ -6,13 +6,12 @@ import com.google.gson.reflect.TypeToken;
 import haneki.module.BasicModule;
 import haneki.module.MessageModule;
 import haneki.util.DataUtil;
+import haneki.util.HtmlTools;
 import net.mamoe.mirai.Bot;
 import net.mamoe.mirai.contact.Group;
 import net.mamoe.mirai.event.events.MessageEvent;
-import net.mamoe.mirai.message.data.ForwardMessageBuilder;
-import net.mamoe.mirai.message.data.MessageChain;
-import net.mamoe.mirai.message.data.MessageChainBuilder;
-import net.mamoe.mirai.message.data.PlainText;
+import net.mamoe.mirai.message.data.*;
+import net.mamoe.mirai.utils.ExternalResource;
 
 
 import java.io.*;
@@ -62,21 +61,27 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
 
     @Override
     public String getTiggerRegex() {
-        return "((?!#)(.|\\n))* (.|\\n)*|(##sumika reload)";
+        return "[\\.。]?((?!#)(.|\\n))* (.|\\n)*|(##sumika reload)";
     }
 
     @Override
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
-        switch (message.contentToString()){
+        String contentS = message.contentToString();
+        boolean isImage = false;
+        switch (contentS){
             case "##sumika reload":
                 messageChainBuilder.append("重置映射。");
                 LoadTiggerMap();
                 return messageChainBuilder.build();
             default:
+                if (contentS.startsWith(".")||contentS.startsWith("。")){
+                    contentS = contentS.substring(1);
+                    isImage = true;
+                }
                 Group group = bot.getGroup(205312025L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
-                String[] key2bCheck = message.contentToString().split(" ");
+                String[] key2bCheck = contentS.split(" ");
                 boolean messageNotNull = false;
                 for (int i = 0; i < key2bCheck.length; i++) {
                     Iterator iterator = tiggerMap.entrySet().iterator();
@@ -86,9 +91,23 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
                         HashMap<String,String> data = entry.getValue();
                         if (key2bCheck[i].matches(regex)){//正则触发了
                             messageNotNull = true;
-                            data.forEach((i18nkey,tableName)->{
-                                forwardMessageBuilder.add(bot.getId(),i18nkey,new PlainText(cardMessageBuilder(tableName,i18nkey)));
-                            });
+                            if (isImage){
+                                data.forEach((i18nkey,tableName)->{
+                                    String url = cardUrlBuilder(tableName,i18nkey);
+                                    try {
+                                        ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(url));
+                                        Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                                        forwardMessageBuilder.add(bot.getId(),i18nkey,img);
+                                    }catch (Exception e){
+                                        System.out.println("[SumikaSqlLite]请求/上传图片时出错。");
+                                        e.printStackTrace();
+                                    }
+                                });
+                            }else {
+                                data.forEach((i18nkey,tableName)->{
+                                    forwardMessageBuilder.add(bot.getId(),i18nkey,new PlainText(cardMessageBuilder(tableName,i18nkey)));
+                                });
+                            }
                         }
                     }
                 }
@@ -127,6 +146,32 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
             thisConfig.forEach((key,value) -> tiggerMap.put(key,value));
         }
         System.out.println("[SumikaSqlLite]映射集载人结束，共[" + tiggerMap.size() + "]条规则。");
+    }
+
+    public String cardUrlBuilder(String typeForTable,String i18nkey){
+        String cardUrl ;
+        String domain = "http://interface.100oj.com/interface/render/";
+        String render;
+        switch (typeForTable){
+            case "cardDeck":
+                render = "carddeck.php";
+                break;
+            case "cardHyper":
+                render = "cardhyper.php";
+                break;
+            case "cardOther":
+                render = "cardother.php";
+                break;
+            case "unitNPC":
+            case "unitCharacter":
+                render = "cardunit.php";
+                break;
+            case "cardBossSkill":
+            default:
+                return "http://interface.100oj.com/common/data/fbfadd/monocoque.png";
+        }
+        cardUrl = domain + render + "?key=" + i18nkey + "&lossless=true";
+        return cardUrl;
     }
 
     public String cardMessageBuilder(String typeForTable,String i18nkey) {
