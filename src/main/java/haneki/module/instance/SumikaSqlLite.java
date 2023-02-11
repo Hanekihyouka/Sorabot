@@ -61,13 +61,13 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
 
     @Override
     public String getTiggerRegex() {
-        return "[\\.。]?((?!#)(.|\\n))* (.|\\n)*|(##sumika reload)";
+        return "(?!#)[\\d\\D]* [\\d\\D]*|[\\. 。].*|(##sumika reload)";
     }
 
     @Override
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
-        String contentS = message.contentToString();
+        String contentS = message.contentToString().replaceAll("[\n　\t]"," ");
         boolean isImage = false;
         switch (contentS){
             case "##sumika reload":
@@ -162,11 +162,11 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
             case "cardOther":
                 render = "cardother.php";
                 break;
-            case "unitNPC":
             case "unitCharacter":
                 render = "cardunit.php";
                 break;
             case "cardBossSkill":
+            case "unitNPC":
             default:
                 return "http://interface.100oj.com/common/data/fbfadd/monocoque.png";
         }
