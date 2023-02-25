@@ -1,5 +1,6 @@
 package haneki.util;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -58,5 +59,48 @@ public class DataUtil {
             }
         }catch (FileNotFoundException ignored){}
         return result;
+    }
+
+    /**
+     * Converts a hex string to a color. If it can't be converted null is returned.
+     * @param hex (i.e. #CCCCCCFF or CCCCCC)
+     * @return Color
+     */
+    public static Color HexToColor(String hex)
+    {
+        hex = hex.replace("#", "");
+        hex = hex.replace("0x", "");
+        switch (hex.length()) {
+            case 3:
+                return new Color(
+                        16*Integer.valueOf(hex.substring(0, 1), 16),
+                        16*Integer.valueOf(hex.substring(1, 2), 16),
+                        16*Integer.valueOf(hex.substring(2, 3), 16));
+            case 4:
+                return new Color(
+                        16*Integer.valueOf(hex.substring(0, 1), 16),
+                        16*Integer.valueOf(hex.substring(1, 2), 16),
+                        16*Integer.valueOf(hex.substring(2, 3), 16),
+                        16*Integer.valueOf(hex.substring(3, 4), 16));
+            case 6:
+                return new Color(
+                        Integer.valueOf(hex.substring(0, 2), 16),
+                        Integer.valueOf(hex.substring(2, 4), 16),
+                        Integer.valueOf(hex.substring(4, 6), 16));
+            case 7:
+                return new Color(
+                        Integer.valueOf(hex.substring(0, 2), 16),
+                        Integer.valueOf(hex.substring(2, 4), 16),
+                        Integer.valueOf(hex.substring(4, 6), 16),
+                        16*Integer.valueOf(hex.substring(6, 7), 16));
+            case 8:
+                return new Color(
+                        Integer.valueOf(hex.substring(0, 2), 16),
+                        Integer.valueOf(hex.substring(2, 4), 16),
+                        Integer.valueOf(hex.substring(4, 6), 16),
+                        Integer.valueOf(hex.substring(6, 8), 16));
+            default:
+                return Color.decode("#"+hex);
+        }
     }
 }

@@ -234,7 +234,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                     "#stat [steam64id] [行数。可不填，默认为5]\n" +
                     "#stat bind [steam64id]    用于将当前qq绑定到对应steam账户。重复使用会更新绑定。\n" +
                     "#stat unbind    删除自己的绑定。\n" +
-                    "#stat me [行数。可不填，默认为5]   在qq绑定steam64id后，使用本命令来快速生成自己的资料。" +
+                    "#stat me [行数。可不填，默认为5]   在qq绑定steam64id后，使用本命令来快速生成自己的资料。\n" +
                     "#stat type [类型编号]   更改出图类型。");
             return messageChainBuilder.build();
         }

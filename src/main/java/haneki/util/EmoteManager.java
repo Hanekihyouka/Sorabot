@@ -105,7 +105,11 @@ public class EmoteManager {
             }else if (content[indexC].matches("[ _]*")){
                 x++;
                 continue;
-            }else {
+            }else if(content[indexC].startsWith("#") || content[indexC].startsWith("0x")){
+                graphics2D.setColor(DataUtil.HexToColor(content[indexC]));
+                graphics2D.fillRect(x*64,y*64,64,64);
+                x++;
+            } else {
                 try {
                     graphics2D.drawImage(ImageIO.read(getImageByName(content[indexC])).getScaledInstance(64,64,Image.SCALE_FAST),x*64,y*64,64,64,null);
                     x++;

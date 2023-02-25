@@ -25,7 +25,7 @@ public class SumikaSqlEmote extends BasicModule implements MessageModule {
 
     @Override
     public String getTiggerRegex() {
-        return "((?!#)(.|\\r|\\n)*:[0-9A-Za-z_]*:(.|\\r|\\n)*)|(#emote.*)";
+        return "((?!#)(.|\\r|\\n)*:(([0-9A-Za-z_]*)|(#[0-9A-Fa-f]{1,8})):(.|\\r|\\n)*)|(#emote.*)";
     }
 
     @Override
@@ -97,7 +97,7 @@ public class SumikaSqlEmote extends BasicModule implements MessageModule {
             }
         }else {
             //only   nums\chars\_:   left
-            String[] content = message.contentToString().replaceAll("[^a-zA-Z0-9_ :\\r\\n]", "").split(":",256);
+            String[] content = message.contentToString().replaceAll("[^a-zA-Z0-9_ :\\r\\n#]", "").split(":",256);
             EmoteManager emoteManager = new EmoteManager();
             File emoteFile = new File(emoteManager.generator(content));
             ExternalResource resource = ExternalResource.create(emoteFile);
