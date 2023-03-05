@@ -170,7 +170,7 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
             default:
                 return "http://interface.100oj.com/common/data/fbfadd/monocoque.png";
         }
-        cardUrl = domain + render + "?key=" + i18nkey + "&lossless=true";
+        cardUrl = domain + render + "?key=" + i18nkey + "&lossless=true&time=true";
         return cardUrl;
     }
 
