@@ -573,8 +573,8 @@ fun Bot.messageDSL(){
             if((getGroup(message.source.targetId)?.getMember(sender.id)?.permission?.level!! >0)){//顺序，由于不能撤回管理的消息
                 message.toMessageChain()[QuoteReply]?.source?.recall()
             }else if ((getPermissionLevel(sender.id)>99)){//权限确认
-                message.recall()
                 message.toMessageChain()[QuoteReply]?.source?.recall()
+                message.recall()
             }
         }
     }
