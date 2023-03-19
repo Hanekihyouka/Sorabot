@@ -570,7 +570,9 @@ fun Bot.messageDSL(){
             }
         }
         Regex("(?i)#撤回|#recall")matching {
-            if ((getPermissionLevel(sender.id)>99) or (getGroup(message.source.targetId)?.getMember(sender.id)?.permission?.level!! >0)){//权限确认
+            if((getGroup(message.source.targetId)?.getMember(sender.id)?.permission?.level!! >0)){//顺序，由于不能撤回管理的消息
+                message.toMessageChain()[QuoteReply]?.source?.recall()
+            }else if ((getPermissionLevel(sender.id)>99)){//权限确认
                 message.recall()
                 message.toMessageChain()[QuoteReply]?.source?.recall()
             }
