@@ -19,6 +19,7 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
+import xyz.cssxsh.mirai.tool.FixProtocolVersion
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -32,10 +33,14 @@ var moduleLoader = ModuleLoader()
 suspend fun main() {
     preInit()
 
+    // fffffffffff
+    FixProtocolVersion.update();
+
     //乙烯 手机
     //忍冬 ipad
     val bot = BotFactory.newBot(
         //***REMOVED***,//忍冬
+        //***REMOVED***
         2877520250,//乙烯
         "***REMOVED***"
     ){
@@ -43,7 +48,8 @@ suspend fun main() {
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        protocol = BotConfiguration.MiraiProtocol.IPAD //忍冬
+        protocol = BotConfiguration.MiraiProtocol.IPAD
+        //protocol = BotConfiguration.MiraiProtocol.ANDROID_PHONE
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()

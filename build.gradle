@@ -51,6 +51,9 @@ dependencies {
 
     //Java Discord API
     compile 'net.dv8tion:JDA:4.2.0_241'
+
+    //extend
+    compile fileTree(dir:'libs',include:['*.jar'])
 }
 
 compileKotlin {
