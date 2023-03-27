@@ -19,7 +19,7 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
-import xyz.cssxsh.mirai.tool.FixProtocolVersion
+//-import xyz.cssxsh.mirai.tool.FixProtocolVersion
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -34,7 +34,7 @@ suspend fun main() {
     preInit()
 
     // fffffffffff
-    FixProtocolVersion.update();
+    //-FixProtocolVersion.update();
 
     //乙烯 手机
     //忍冬 ipad
