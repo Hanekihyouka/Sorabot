@@ -759,9 +759,19 @@ suspend fun timer(bot:Bot){
         * 一些时间触发
         * */
         when (time_str) {
+            "22:30" -> {
+                bot.groups.forEach {
+                    it.sendMessage("这将是一个可怕的夜晚……")
+                }
+            }
             "23:00" -> {
                 bot.groups.forEach {
-                    it.sendMessage("该睡觉了。")
+                    it.sendMessage("周围的空气越来越冷……")
+                }
+            }
+            "23:30" -> {
+                bot.groups.forEach {
+                    it.sendMessage("你感受到地下深处的震动……")
                 }
             }
         }
