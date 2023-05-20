@@ -2,6 +2,7 @@ buildscript {
     ext.kotlin_version = '1.8.10'
     repositories {
         jcenter()
+        maven {url 'https://repo.mirai.mamoe.net/snapshots'}
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
@@ -25,10 +26,13 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
     jcenter()
+    maven {url 'https://repo.mirai.mamoe.net/snapshots'}
 }
+
 
 dependencies {
     implementation 'net.mamoe:mirai-core:2.15.0-M1'
+    //implementation 'net.mamoe:mirai-core:2.15.0-him188-revise-on-demand-scope-22'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
@@ -50,7 +54,7 @@ dependencies {
     implementation 'net.dv8tion:JDA:4.2.0_241'
 
     //-extend
-    //-implementation fileTree(dir:'libs',include:['*.jar'])
+    implementation fileTree(dir:'libs',include:['*.jar'])
 }
 
 compileKotlin {

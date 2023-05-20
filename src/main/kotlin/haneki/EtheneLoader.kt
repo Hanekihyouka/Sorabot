@@ -19,7 +19,7 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
-//-import xyz.cssxsh.mirai.tool.FixProtocolVersion
+import xyz.cssxsh.mirai.tool.FixProtocolVersion
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -34,30 +34,37 @@ suspend fun main() {
     preInit()
 
     // fffffffffff
-    //-FixProtocolVersion.update();
+    FixProtocolVersion.update();
 
     //乙烯 手机
     //忍冬 ipad
+    //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
+
     val bot = BotFactory.newBot(
-        //***REMOVED***,//忍冬
-        //***REMOVED***
-        2877520250,//乙烯
-        "***REMOVED***"
-    ){
+        ***REMOVED***,//忍冬
+        ***REMOVED***
+        //2877520250,//乙烯
+        //"***REMOVED***"
+    )
+    {
         fileBasedDeviceInfo("device.json")
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        protocol = BotConfiguration.MiraiProtocol.IPAD
-        //protocol = BotConfiguration.MiraiProtocol.ANDROID_PHONE
+        protocol = BotConfiguration.MiraiProtocol.ANDROID_PAD
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()
+
+
 
     bot.updateConfig()
     bot.jdaBuilder(bot)
     bot.messageDSL()
     timer(bot)
+
+
+
     bot.join() // 等待 Bot 离线, 避免主线程退出
 }
 
