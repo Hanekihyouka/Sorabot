@@ -41,17 +41,19 @@ suspend fun main() {
     //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
 
     val bot = BotFactory.newBot(
-        ***REMOVED***,//忍冬
-        ***REMOVED***
+        //***REMOVED***,//忍冬
+        //***REMOVED***
         //2877520250,//乙烯
         //"***REMOVED***"
+        ***REMOVED***,//叶
+        "100oj.com"
     )
     {
         fileBasedDeviceInfo("device.json")
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        protocol = BotConfiguration.MiraiProtocol.ANDROID_PAD
+        protocol = BotConfiguration.MiraiProtocol.IPAD
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()
