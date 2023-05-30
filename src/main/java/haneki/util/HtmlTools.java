@@ -8,8 +8,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class HtmlTools {
@@ -40,7 +42,7 @@ public class HtmlTools {
     //===========================
 
     /**
-     * 从网络Url中读取1行文本
+     * 从网络Url中读取~~1行~~文本
      *
      * @param urls 链接
      *
@@ -56,7 +58,11 @@ public class HtmlTools {
             InputStream input = httpUrlConn.getInputStream();
             InputStreamReader read = new InputStreamReader(input, "utf-8");
             BufferedReader br = new BufferedReader(read);
-            String data = br.readLine();
+            String data = "";
+            String line;
+            while ((line = br.readLine()) != null) {
+                data = data + line;
+            }
             br.close();
             read.close();
             input.close();
@@ -65,6 +71,16 @@ public class HtmlTools {
             e.printStackTrace();
         }
         return "发生错误";
+    }
+
+    public static String readStringFromURL(String requestURL) {
+        try (Scanner scanner = new Scanner(new URL(requestURL).openStream(), StandardCharsets.UTF_8.toString())) {
+            scanner.useDelimiter("\\A");
+            return scanner.hasNext() ? scanner.next() : "";
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
     public static void urlToHtml(String urls,String outputpath){
         try {

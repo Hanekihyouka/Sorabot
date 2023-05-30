@@ -8,6 +8,7 @@ import haneki.module.instance.*
 import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDABuilder
 import net.mamoe.mirai.*
+import net.mamoe.mirai.auth.BotAuthorization
 import net.mamoe.mirai.contact.getMember
 import net.mamoe.mirai.contact.nameCardOrNick
 import net.mamoe.mirai.event.events.GroupMessageEvent
@@ -38,22 +39,22 @@ suspend fun main() {
 
     //乙烯 手机
     //忍冬 ipad
-    //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
+    var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
 
-    val bot = BotFactory.newBot(
+    //val bot = BotFactory.newBot(
         //***REMOVED***,//忍冬
         //***REMOVED***
         //2877520250,//乙烯
         //"***REMOVED***"
-        ***REMOVED***,//叶
-        "100oj.com"
-    )
+        //***REMOVED***,//叶
+        //"100oj.com"
+    //)
     {
         fileBasedDeviceInfo("device.json")
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        protocol = BotConfiguration.MiraiProtocol.IPAD
+        protocol = BotConfiguration.MiraiProtocol.ANDROID_WATCH
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()
@@ -61,7 +62,7 @@ suspend fun main() {
 
 
     bot.updateConfig()
-    bot.jdaBuilder(bot)
+    //bot.jdaBuilder(bot)
     bot.messageDSL()
     timer(bot)
 
@@ -736,6 +737,8 @@ fun loadModule(){
     moduleLoader.moduleList.put(mcmod.module_name,mcmod)
     var abutton = BigRedButton("AB起爆器")
     moduleLoader.moduleList.put(abutton.module_name,abutton)
+    var lhwBattle = LhwBattle("LhwBattle")
+    moduleLoader.moduleList.put(lhwBattle.module_name,lhwBattle)
 }
 
 /**
