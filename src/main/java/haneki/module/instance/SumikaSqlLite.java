@@ -68,6 +68,10 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
         String contentS = message.contentToString().replaceAll("[\n　\t]"," ");
+        if (contentS.contains(" vs ")){
+            // for lhw battle
+            return null;
+        }
         boolean isImage = false;
         switch (contentS){
             case "##sumika reload":

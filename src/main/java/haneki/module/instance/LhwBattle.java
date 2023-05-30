@@ -23,59 +23,40 @@ public class LhwBattle extends BasicModule implements MessageModule {
 
     @Override
     public String getTiggerRegex() {
-        return "#ojbk? .*";
+        return "(-?\\d){4} vs (-?\\d){4}";
     }
 
     @Override
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
 
-        Group group = bot.getGroup(205312025L);//SumikaSystem
-        ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
-        String[] params = message.contentToString().split(" ");
-        switch (params.length){
-            case 9:
-                messageChainBuilder.append(HtmlTools.readStringFromURL("http://47.242.108.196:1570/battle" +
-                        "?hp=" + params[1] +
-                        "&atk=" + params[2] +
-                        "&def=" + params[3] +
-                        "&evd=" + params[4] +
-                        "&hpt=" + params[5] +
-                        "&atkt=" + params[6] +
-                        "&deft=" + params[7] +
-                        "&evdt=" + params[8]
-                ));
-                break;
-            case 3:
-                String[] p = new String[8];
-                int pi = 0;
-                for (int pj = 1; pj < 3; pj++) {
-                    char[] chara = params[pj].toCharArray();
-                    for (int i = 0; i < chara.length; i++) {
-                        if (chara[i]!='-'){
-                            p[pi] = String.valueOf(chara[i]);
-                        }else {
-                            p[pi] = String.valueOf(chara[i]) + chara[i + 1];
-                            i++;
-                        }
-                        pi++;
-                    }
+        //Group group = bot.getGroup(205312025L);//SumikaSystem
+        //ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
+        String[] params = message.contentToString().split(" vs ");
+        String[] p = new String[8];
+        int pi = 0;
+        for (int pj = 0; pj < 2; pj++) {
+            char[] chara = params[pj].toCharArray();
+            for (int i = 0; i < chara.length; i++) {
+                if (chara[i]!='-'){
+                    p[pi] = String.valueOf(chara[i]);
+                }else {
+                    p[pi] = String.valueOf(chara[i]) + chara[i + 1];
+                    i++;
                 }
-                messageChainBuilder.append(HtmlTools.readStringFromURL("http://47.242.108.196:1570/battle" +
-                        "?hp=" + p[0] +
-                        "&atk=" + p[1] +
-                        "&def=" + p[2] +
-                        "&evd=" + p[3] +
-                        "&hpt=" + p[4] +
-                        "&atkt=" + p[5] +
-                        "&deft=" + p[6] +
-                        "&evdt=" + p[7]
-                ));
-                break;
-            default:
-                messageChainBuilder.append("参数数量错误。");
-                break;
+                pi++;
+            }
         }
+        messageChainBuilder.append(HtmlTools.readStringFromURL("http://47.242.108.196:1570/battle" +
+                "?hp=" + p[0] +
+                "&atk=" + p[1] +
+                "&def=" + p[2] +
+                "&evd=" + p[3] +
+                "&hpt=" + p[4] +
+                "&atkt=" + p[5] +
+                "&deft=" + p[6] +
+                "&evdt=" + p[7]
+        ));
         return messageChainBuilder.build();
     }
 }
