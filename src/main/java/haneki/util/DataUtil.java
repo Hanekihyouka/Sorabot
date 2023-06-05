@@ -29,6 +29,13 @@ public class DataUtil {
         }
     }
 
+    public static String caotureName(String name){
+        name = name.toLowerCase();
+        char[] cs = name.toCharArray();
+        cs[0] = (char) (name.charAt(0) + 'A' - 'a');
+        return String.valueOf(cs);
+    }
+
     public static boolean isSteam64id(String content){
         String pattern = "7656(\\d){13}";
         Pattern r = Pattern.compile(pattern);
