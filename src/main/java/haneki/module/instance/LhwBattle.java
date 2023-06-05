@@ -34,23 +34,24 @@ public class LhwBattle extends BasicModule implements MessageModule {
         Group group = bot.getGroup(205312025L);//SumikaSystem
         ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
         if (message.contentToString().contains("vs help")){
-            messageChainBuilder.append(
+            forwardMessageBuilder.add(bot.getId(),"vs help",new PlainText(
                     "vs 使用方法\n" +
-                    "\n" +
-                    "基础：\n" +
-                    "血攻防闪 vs 血攻防闪\n" +
-                    "41-12 vs 411-1\n" +
-                    "\n" +
-                    "增加被动：\n" +
-                    "4001 Repa vs 41-20 Msk\n" +
-                    "\n" +
-                    "被动列表：\n" +
-                    "雪莉：Sherry\n" +
-                    "蕾帕：Repa\n" +
-                    "美羽咲：Msk\n" +
-                    "船长：Tql\n" +
-                    "依琉：Iru");
-            return messageChainBuilder.build();
+                            "\n" +
+                            "基础：\n" +
+                            "血攻防闪 vs 血攻防闪\n" +
+                            "41-12 vs 411-1\n" +
+                            "\n" +
+                            "增加被动：\n" +
+                            "4001 Repa vs 41-20 Msk\n" +
+                            "\n" +
+                            "被动列表：\n" +
+                            "雪莉：Sherry\n" +
+                            "蕾帕：Repa\n" +
+                            "美羽咲：Msk\n" +
+                            "船长：Tql\n" +
+                            "依琉：Iru"
+            ));
+            return messageChainBuilder.append(forwardMessageBuilder.build()).build();
         }
         String[] players = message.contentToString().split(" vs ");
         String[] params = new String[2];
