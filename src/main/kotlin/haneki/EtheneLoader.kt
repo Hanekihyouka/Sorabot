@@ -36,11 +36,9 @@ suspend fun main() {
 
     // fffffffffff
     FixProtocolVersion.update();
+    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PAD);
 
-    //乙烯 手机
-    //忍冬 ipad
     //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
-
     val bot = BotFactory.newBot(
         //***REMOVED***,//忍冬
         //***REMOVED***
