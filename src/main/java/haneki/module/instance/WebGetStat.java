@@ -12,6 +12,7 @@ import net.mamoe.mirai.message.data.MessageChainBuilder;
 import net.mamoe.mirai.utils.ExternalResource;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class WebGetStat extends BasicModule implements MessageModule {
     static final String URL_HEADER = "http://interface.100oj.com/stat/render.php?steamid=";
@@ -122,6 +123,77 @@ public class WebGetStat extends BasicModule implements MessageModule {
                             stmt.close();
                         }catch (SQLException | ClassNotFoundException e){
                             messageChainBuilder.append("JDBC错误。\n在数据库中查找你的信息失败。\n如果你还没有绑定过id，使用[#stat bind [steam64id]]来进行绑定。");
+                            e.printStackTrace();
+                            return messageChainBuilder.build();
+                        }
+                        messageChainBuilder.append("Done.");
+                        return messageChainBuilder.build();
+                    }
+                case "pin":
+                case "-p":
+                    if (params.length==2){
+                        messageChainBuilder.append("请指定类型。\n在 https://interface.100oj.com/stat/pininfo.html 查看所有类型。");
+                        return messageChainBuilder.build();
+                    }else {
+                        String pin_name = "sp1_" +  Integer.parseInt(params[2]);
+                        try {
+                            Class.forName(JDBC_DRIVER);
+                            System.out.println("[SD]连接数据库...");
+                            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                            System.out.println("[SD]实例化Statement对象...");
+                            String sql = "select " + pin_name + " from steamInfo where qq = ?;";
+                            // if reset pin
+                            if (Objects.equals(params[2], "0")){
+                                sql = "update steamInfo set sp1 = 0 where qq = ?;";
+                                stmt = conn.prepareStatement(sql);
+                                stmt.setLong(1,messageEvent.getSender().getId());
+                                stmt.executeUpdate();
+                                conn.close();
+                                stmt.close();
+                                messageChainBuilder.append("Done.");
+                                System.out.println("[SD]重置pin");
+                                return messageChainBuilder.build();
+                            }
+                            //check if user has the pin
+                            stmt = conn.prepareStatement(sql);
+                            stmt.setLong(1,messageEvent.getSender().getId());
+                            ResultSet rs = stmt.executeQuery();
+                            if (rs.next()){
+                                if (!rs.wasNull()){
+                                    if (rs.getBoolean(pin_name)){
+                                        //im not sure if it should close this
+                                        rs.close();
+                                        stmt.clearParameters();
+                                        //set pin
+                                        sql = "update steamInfo set sp1 = ? where qq = ?;";
+                                        stmt = conn.prepareStatement(sql);
+                                        stmt.setInt(1, Integer.parseInt(params[2]));
+                                        stmt.setLong(2,messageEvent.getSender().getId());
+                                        stmt.executeUpdate();
+                                        System.out.println("[SD]设置pin");
+                                        stmt.close();
+                                    }else {
+                                        conn.close();
+                                        stmt.close();
+                                        messageChainBuilder.append("你无法使用这个 pin。\n在 https://interface.100oj.com/stat/pininfo.html 查看所有类型。");
+                                        return messageChainBuilder.build();
+                                    }
+                                }else {
+                                    conn.close();
+                                    stmt.close();
+                                    messageChainBuilder.append("你无法使用这个 pin。\n在 https://interface.100oj.com/stat/pininfo.html 查看所有类型。");
+                                    return messageChainBuilder.build();
+                                }
+                            }else {
+                                conn.close();
+                                stmt.close();
+                                messageChainBuilder.append("在数据库中查找你的信息失败。\n如果你还没有绑定过id，使用[#stat bind [steam64id]]来进行绑定。");
+                                return messageChainBuilder.build();
+                            }
+                            conn.close();
+                            stmt.close();
+                        }catch (SQLException | ClassNotFoundException e){
+                            messageChainBuilder.append("不存在的 pin。\n在 https://interface.100oj.com/stat/pininfo.html 查看所有类型。");
                             e.printStackTrace();
                             return messageChainBuilder.build();
                         }
