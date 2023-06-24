@@ -35,8 +35,10 @@ suspend fun main() {
     preInit()
 
     // fffffffffff
-    FixProtocolVersion.update();
-    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PAD);
+    FixProtocolVersion.update()
+    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PAD)
+    FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PAD);
+
 
     //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
     val bot = BotFactory.newBot(
