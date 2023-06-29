@@ -36,8 +36,8 @@ suspend fun main() {
 
     // fffffffffff
     FixProtocolVersion.update()
-    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PAD)
-    FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PAD);
+    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
+    FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
 
 
     //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
@@ -54,7 +54,7 @@ suspend fun main() {
         autoReconnectOnForceOffline()
         redirectNetworkLogToFile()
         //切换协议
-        protocol = BotConfiguration.MiraiProtocol.ANDROID_PAD
+        protocol = BotConfiguration.MiraiProtocol.ANDROID_PHONE
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }.alsoLogin()
