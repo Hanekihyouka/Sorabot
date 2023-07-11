@@ -139,13 +139,13 @@ public class Discord2Mirai extends ListenerAdapter {
              *
              * **/
 
-            pattern = "https://twitter\\.com/\\w+?/status/[0-9]{18,22}";
+            pattern = "https://(vx)?twitter\\.com/\\w+?/status/[0-9]{18,22}";
             r = Pattern.compile(pattern);
             m = r.matcher(content);
 
             for (int i = 0;m.find(); i++) {
                 hasTwitter = true;
-                tmd_command += " \"" + m.group(0) + "\"";
+                tmd_command += " \"" + m.group(0).replaceFirst("https://vx","https://") + "\"";
             }
             if (hasTwitter){
                 try {
@@ -219,13 +219,13 @@ public class Discord2Mirai extends ListenerAdapter {
              * 发布镜像链接
              *
              * **/
-            String pattern = "https://twitter\\.com/\\w+?/status/[0-9]{18,22}";
+            String pattern = "https://(vx)?twitter\\.com/\\w+?/status/[0-9]{18,22}";
             Pattern r = Pattern.compile(pattern);
             Matcher m = r.matcher(content);
 
             for (int i = 0;m.find(); i++) {
                 hasTwitter = true;
-                tmd_command += " \"" + m.group(0) + "\"";
+                tmd_command += " \"" + m.group(0).replaceFirst("https://vx","https://") + "\"";
             }
             if (hasTwitter){
                 try {
