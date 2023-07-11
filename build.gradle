@@ -3,6 +3,7 @@ buildscript {
     repositories {
         jcenter()
         maven {url 'https://repo.mirai.mamoe.net/snapshots'}
+        maven {url 'https://jitpack.io'}
     }
     dependencies {
         classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
@@ -19,7 +20,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'haneki'
-version '2.15.0-RC'
+version '2.15.0'
 
 sourceCompatibility = 17
 
@@ -27,13 +28,13 @@ repositories {
     mavenCentral()
     jcenter()
     maven {url 'https://repo.mirai.mamoe.net/snapshots'}
+    maven {url 'https://jitpack.io'}
 }
 
 
 dependencies {
-    implementation 'net.mamoe:mirai-core:2.15.0-RC'
+    implementation 'net.mamoe:mirai-core:2.15.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
 
     //java Google-json API
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -52,6 +53,14 @@ dependencies {
     //Java Discord API
     implementation 'net.dv8tion:JDA:4.2.0_241'
 
+    //async for cssxsh:fix-protocol-version
+    implementation group: 'org.asynchttpclient', name: 'async-http-client', version: '2.12.3'
+    //interface for qsign
+    implementation 'com.github.MrXiaoM:KawaiiMiku:0.1.5'
+    //for miku
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
+
+    //lib jar cssxsh:fix-protocol-version
     //-extend
     implementation fileTree(dir:'libs',include:['*.jar'])
 }

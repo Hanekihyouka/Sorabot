@@ -8,7 +8,6 @@ import haneki.module.instance.*
 import kotlinx.coroutines.delay
 import net.dv8tion.jda.api.JDABuilder
 import net.mamoe.mirai.*
-import net.mamoe.mirai.auth.BotAuthorization
 import net.mamoe.mirai.contact.getMember
 import net.mamoe.mirai.contact.nameCardOrNick
 import net.mamoe.mirai.event.events.GroupMessageEvent
@@ -20,6 +19,8 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
+import top.mrxiaom.mirai.kawaii.EncryptProvider
+import top.mrxiaom.mirai.kawaii.SignClient
 import xyz.cssxsh.mirai.tool.FixProtocolVersion
 import java.io.BufferedReader
 import java.io.File
@@ -35,6 +36,7 @@ suspend fun main() {
     preInit()
 
     // fffffffffff
+
     FixProtocolVersion.update()
     FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
     FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
@@ -57,9 +59,18 @@ suspend fun main() {
         protocol = BotConfiguration.MiraiProtocol.ANDROID_PHONE
         //切换心跳策略
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
-    }.alsoLogin()
+    }
 
+    EncryptProvider.Factory.also {
+        // 以后需要修改地址时使用 put(url, key)
+        it.put("http://127.0.0.1:11053", "13777")
+        // 此处填写 cmd whitelist
+        it.cmdWhiteList = SignClient.defaultCmdWhiteList
+        // 只需要注册一次
+        it.registerAsOverride()
+    }
 
+    bot.alsoLogin()
 
     bot.updateConfig()
     bot.jdaBuilder(bot)
