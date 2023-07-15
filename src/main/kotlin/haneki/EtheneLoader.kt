@@ -19,9 +19,8 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
-import top.mrxiaom.mirai.kawaii.EncryptProvider
-import top.mrxiaom.mirai.kawaii.SignClient
 import xyz.cssxsh.mirai.tool.FixProtocolVersion
+import xyz.cssxsh.mirai.tool.KFCFactory
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -41,8 +40,6 @@ suspend fun main() {
     FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
     FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
 
-
-    //var bot = BotFactory.newBot(2877520250L, authorization = BotAuthorization.byQRCode())
     val bot = BotFactory.newBot(
         //***REMOVED***,//忍冬
         //***REMOVED***
@@ -61,16 +58,15 @@ suspend fun main() {
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }
 
-    EncryptProvider.Factory.also {
-        // 以后需要修改地址时使用 put(url, key)
-        it.put("http://127.0.0.1:11053", "13777")
-        // 此处填写 cmd whitelist
-        it.cmdWhiteList = SignClient.defaultCmdWhiteList
-        // 只需要注册一次
-        it.registerAsOverride()
-    }
+    KFCFactory.Companion.install();
+
+    KFCFactory(File("./config/KFConfig.json"))
+
+    println("FixProtocolVersion.info()")
+    println(FixProtocolVersion.info())
 
     bot.alsoLogin()
+
 
     bot.updateConfig()
     bot.jdaBuilder(bot)
