@@ -52,7 +52,7 @@ public class Gelbooru extends BasicModule implements MessageModule {
                         break;
                 }
 
-                Group group = bot.getGroup(205312025L);//SumikaSystem
+                Group group = bot.getGroup(475379747L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
                 String booruImageUrl = "http://interface.100oj.com/common/data/emotes/fr_mpoppo00_large.png";
                 if (booruImageInfo.getRating().equals("e")){

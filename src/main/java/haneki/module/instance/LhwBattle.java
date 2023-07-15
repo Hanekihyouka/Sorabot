@@ -31,7 +31,7 @@ public class LhwBattle extends BasicModule implements MessageModule {
     @Override
     public MessageChain moduleReact(MessageChain message, MessageEvent messageEvent, Bot bot) {
         MessageChainBuilder messageChainBuilder = new MessageChainBuilder();
-        Group group = bot.getGroup(205312025L);//SumikaSystem
+        Group group = bot.getGroup(475379747L);//SumikaSystem
         ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
         if (message.contentToString().contains("vs help")){
             forwardMessageBuilder.add(bot.getId(),"vs help",new PlainText(

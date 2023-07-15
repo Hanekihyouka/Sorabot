@@ -65,7 +65,7 @@ public class Mcmod extends BasicModule implements MessageModule {
         }
         String[][] dataList = HtmlSoup.getMcmodDataList(searchKey,filter);
         if (dataList.length>0){
-            Group group = bot.getGroup(205312025L);//SumikaSystem
+            Group group = bot.getGroup(475379747L);//SumikaSystem
             ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
             forwardMessageBuilder.add(bot.getId(),"请发送编号",new PlainText("请发送编号查看。"));
             for (int i = 0; i < dataList.length; i++) {
@@ -83,7 +83,7 @@ public class Mcmod extends BasicModule implements MessageModule {
                         ForwardMessageBuilder mcforwardMessageBuilder = new ForwardMessageBuilder(group);
                         try {
                             ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(mcData.getIconURL()));
-                            Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                            Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                             mcforwardMessageBuilder.add(bot.getId(),"资料",img);
                         }catch (Exception e){
                             System.out.println("[Mcmod]请求/上传图片时出错。");

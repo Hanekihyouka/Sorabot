@@ -71,7 +71,7 @@ public class Le extends BasicModule implements MessageModule {
             case "#塔罗":
             case "#tarot":
             case "#tarots":
-                return leTarot(bot.getId(),messageEvent.getSender().getId(),messageEvent.getSubject(),bot.getGroup(205312025L));//SumikaSystem
+                return leTarot(bot.getId(),messageEvent.getSender().getId(),messageEvent.getSubject(),bot.getGroup(475379747L));//SumikaSystem
             case "#le":
             case "#乐":
                 return leLuLu(messageEvent);

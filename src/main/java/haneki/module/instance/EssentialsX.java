@@ -28,7 +28,7 @@ public class EssentialsX extends BasicModule implements MessageModule {
         switch (params[1]){
             case "help":
             case "-h":
-                Group group = bot.getGroup(205312025L);//SumikaSystem
+                Group group = bot.getGroup(475379747L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
                 forwardMessageBuilder.add(bot.getId(),"INDEX",new PlainText("##EssentialsX模块，可用指令头>help、module、reload、operator"));
                 forwardMessageBuilder.add(bot.getId(),"help",new PlainText("##ess help"));

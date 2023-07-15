@@ -102,7 +102,7 @@ public class RegexReply extends BasicModule implements NeedOperactor {
                         break;
                     case "-l":
                     case "list":
-                        Group group = bot.getGroup(205312025L);//SumikaSystem
+                        Group group = bot.getGroup(475379747L);//SumikaSystem
                         ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
                         forwardMessageBuilder.add(bot.getId(),"自定资料列表",new PlainText(checkRule()));
                         messageChainBuilder.append(forwardMessageBuilder.build());
@@ -113,7 +113,7 @@ public class RegexReply extends BasicModule implements NeedOperactor {
             }
         }else {
             boolean tigger = false;
-            Group group = bot.getGroup(205312025L);//SumikaSystem
+            Group group = bot.getGroup(475379747L);//SumikaSystem
             ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
             String[] key2bCheck = message.contentToString().split(" ");
             for (int i = 0; i < key2bCheck.length; i++) {

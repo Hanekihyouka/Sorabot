@@ -45,7 +45,7 @@ public class WebGet extends BasicModule implements MessageModule {
                 //HtmlTools.downLoadFromUrl(url,System.currentTimeMillis() + ".webp","./data/web_get_image");
                 try {
                     ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(url));
-                    Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                    Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                     messageChainBuilder.append(img);
                 }catch (Exception e){
                     System.out.println("[WebGet]请求/上传图片时出错。");
@@ -70,7 +70,7 @@ public class WebGet extends BasicModule implements MessageModule {
                     process.waitFor();
 
                     ExternalResource ex = ExternalResource.Companion.create(new File(out_path));
-                    Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                    Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                     messageChainBuilder.append(img);
 
                     br.close();

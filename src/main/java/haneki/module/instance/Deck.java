@@ -57,7 +57,7 @@ public class Deck extends BasicModule implements MessageModule {
             }
 
             ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(URL_HEADER + content));
-            Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+            Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
             messageChainBuilder.append(img);
         }catch (Exception e){
             System.out.println("[Deck]请求/上传图片时出错。");

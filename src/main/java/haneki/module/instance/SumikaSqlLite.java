@@ -83,7 +83,7 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
                     contentS = contentS.substring(1);
                     isImage = true;
                 }
-                Group group = bot.getGroup(205312025L);//SumikaSystem
+                Group group = bot.getGroup(475379747L);//SumikaSystem
                 ForwardMessageBuilder forwardMessageBuilder = new ForwardMessageBuilder(group);
                 String[] key2bCheck = contentS.split(" ");
                 boolean messageNotNull = false;
@@ -100,7 +100,7 @@ public class SumikaSqlLite extends BasicModule implements MessageModule {
                                     String url = cardUrlBuilder(tableName,i18nkey);
                                     try {
                                         ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(url));
-                                        Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                                        Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                                         forwardMessageBuilder.add(bot.getId(),i18nkey,img);
                                     }catch (Exception e){
                                         System.out.println("[SumikaSqlLite]请求/上传图片时出错。");

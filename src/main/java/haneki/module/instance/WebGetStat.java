@@ -291,7 +291,7 @@ public class WebGetStat extends BasicModule implements MessageModule {
                     try {
                         ExternalResource ex = ExternalResource.Companion.create(HtmlTools.getUrlByByte(url));
                         System.out.println("[SD]尝试获取>" + url);
-                        Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(205312025));//上传图片
+                        Image img = ExternalResource.uploadAsImage(ex,bot.getGroup(475379747));//上传图片
                         messageChainBuilder.append(img);
                         return messageChainBuilder.build();
                     }catch (Exception ignored){
