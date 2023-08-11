@@ -37,7 +37,7 @@ suspend fun main() {
     // fffffffffff
 
     FixProtocolVersion.update()
-    FixProtocolVersion.sync(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
+    //FixProtocolVersion.fetch(BotConfiguration.MiraiProtocol.ANDROID_PHONE, "8.9.73");
     FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
 
     val bot = BotFactory.newBot(
@@ -60,7 +60,7 @@ suspend fun main() {
 
     KFCFactory.Companion.install();
 
-    KFCFactory(File("./config/KFConfig.json"))
+    //KFCFactory(File("./config/KFConfig.json"))
 
     println("FixProtocolVersion.info()")
     println(FixProtocolVersion.info())
@@ -129,7 +129,8 @@ fun Bot.messageDSL(){
 
         Regex("(?i).?.?help")matching{
             subject.sendMessage("SoraBot使用指南>\n" +
-                    "http://100oj.com/zh/%E5%B7%A5%E5%85%B7/SoraBot%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97")
+                    "http://100oj.com/zh/%E5%B7%A5%E5%85%B7/SoraBot%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97\n" +
+                    "任何反馈，邮件联系 sora@100oj.com")
         }
         /**
          * ess模块的一部分，涉及核心的内容，直接写在这里

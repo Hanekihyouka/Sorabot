@@ -260,7 +260,7 @@ public class Discord2Mirai extends ListenerAdapter {
             m = r.matcher(content);
             for (int i = 0;m.find(); i++) {
                 hasPixiv = true;
-                chain.append("https://px2.rainchan.win/img/regular/" + m.group(1) + "\n");
+                chain.append("https://px2.rainchan.win/img/regular/" + m.group(1) + "\n" + "pid:" + m.group(1));
             }
 
             if (hasPixiv | hasTwitter){
