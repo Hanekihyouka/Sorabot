@@ -781,7 +781,9 @@ suspend fun timer(bot:Bot){
         when (time_str) {
             "23:00" -> {
                 bot.groups.forEach {
-                    it.sendMessage("该睡觉了！")
+                    when(it.id){
+                        475379747L,223667456L,241458328L,862716392L -> {it.sendMessage("该睡觉了！")}
+                    }
                 }
             }
         }

@@ -56,7 +56,7 @@ public class Discord2Mirai extends ListenerAdapter {
             //头部
             switch (String.valueOf(channel_id)){
                 case "819881875660603402"://bot-cmd
-                    chain.append("#bot-cmd>\n");
+                    chain.append("#bot-carton>\n");
                     break;
                 case "960682453209587712"://box-大转发池子
                     toOJGroup = true;
@@ -166,7 +166,7 @@ public class Discord2Mirai extends ListenerAdapter {
                             bot.getGroup(475379747).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//纸箱
                             if (toOJGroup){
                                 bot.getGroup(223667456).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//佳
-                                bot.getGroup(572808546).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//小店
+                                //bot.getGroup(572808546).getFiles().getRoot().resolveFolder("临时文件").uploadNewFile(img_name,gif);//小店
                             }
                             gif.close();
                         }
@@ -204,7 +204,9 @@ public class Discord2Mirai extends ListenerAdapter {
             Objects.requireNonNull(bot.getGroup(475379747)).sendMessage(chain.build());//纸箱
             if (toOJGroup){
                 Objects.requireNonNull(bot.getGroup(223667456)).sendMessage(chain.build());//佳
-                Objects.requireNonNull(bot.getGroup(572808546)).sendMessage(chain.build());//小店
+                //Objects.requireNonNull(bot.getGroup(572808546)).sendMessage(chain.build());//小店
+                Objects.requireNonNull(bot.getGroup(241458328)).sendMessage(chain.build());//狐狸
+                Objects.requireNonNull(bot.getGroup(862716392)).sendMessage(chain.build());//小店重建
             }
         }else if(channel_id==612854891114790920L){
             //转发到 背着xx
@@ -266,7 +268,9 @@ public class Discord2Mirai extends ListenerAdapter {
             if (hasPixiv | hasTwitter){
                 Objects.requireNonNull(bot.getGroup(475379747)).sendMessage(chain.build());//纸箱
                 Objects.requireNonNull(bot.getGroup(223667456)).sendMessage(chain.build());//佳
-                Objects.requireNonNull(bot.getGroup(572808546)).sendMessage(chain.build());//小店
+                //Objects.requireNonNull(bot.getGroup(572808546)).sendMessage(chain.build());//小店
+                Objects.requireNonNull(bot.getGroup(241458328)).sendMessage(chain.build());//狐狸
+                Objects.requireNonNull(bot.getGroup(862716392)).sendMessage(chain.build());//小店重建
             }
         }
 
