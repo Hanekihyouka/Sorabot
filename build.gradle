@@ -63,6 +63,10 @@ dependencies {
     //lib jar cssxsh:fix-protocol-version
     //-extend
     implementation fileTree(dir:'libs',include:['*.jar'])
+
+    //https://github.com/MrXiaoM/qsign/tree/mirai
+    //implementation 'top.mrxiaom:qsign:8.9.63'
+
 }
 
 compileKotlin {
