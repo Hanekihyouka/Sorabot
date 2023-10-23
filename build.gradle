@@ -20,7 +20,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group 'haneki'
-version '2.15.0'
+version '2.16.0'
 
 sourceCompatibility = 17
 
@@ -33,7 +33,7 @@ repositories {
 
 
 dependencies {
-    implementation 'net.mamoe:mirai-core:2.15.0'
+    implementation 'net.mamoe:mirai-core:2.16.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     //java Google-json API
