@@ -21,8 +21,6 @@ import net.mamoe.mirai.event.subscribeMessages
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.utils.BotConfiguration
-import xyz.cssxsh.mirai.tool.FixProtocolVersion
-import xyz.cssxsh.mirai.tool.KFCFactory
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
@@ -37,12 +35,6 @@ var moduleLoader = ModuleLoader()
 
 suspend fun main() {
     preInit()
-
-    // fffffffffff
-
-    FixProtocolVersion.update()
-    //FixProtocolVersion.fetch(BotConfiguration.MiraiProtocol.ANDROID_PHONE, "8.9.73");
-    FixProtocolVersion.load(BotConfiguration.MiraiProtocol.ANDROID_PHONE)
 
     setupQSign()
 
@@ -64,15 +56,7 @@ suspend fun main() {
         heartbeatStrategy = BotConfiguration.HeartbeatStrategy.STAT_HB
     }
 
-    KFCFactory.Companion.install();
-
-    //KFCFactory(File("./config/KFConfig.json"))
-
-    println("FixProtocolVersion.info()")
-    println(FixProtocolVersion.info())
-
     bot.alsoLogin()
-
 
     bot.updateConfig()
     bot.jdaBuilder(bot)
