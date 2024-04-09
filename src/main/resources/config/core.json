@@ -1,0 +1,230 @@
+{
+  "mysql_ip": null,
+  "mysql_port": 0,
+  "mysql_user": null,
+  "mysql_password": null,
+  "groupConfigList": {
+    "647394772": {
+      "group_id": 647394772,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "862716392": {
+      "group_id": 862716392,
+      "module_enabled": [
+        "WebGetStat",
+        "乐"
+      ],
+      "greet": "欢迎光临橙汁小店避难所，本群为旧址重建。\n\nbot食用说明#help，使用指令请不要刷屏。",
+      "isGreet": true
+    },
+    "205312025": {
+      "group_id": 205312025,
+      "module_enabled": [
+        "TestModule",
+        "EssentialsX",
+        "SumikaSql",
+        "SumikaSqlLite",
+        "WebGetImage",
+        "Mixer",
+        "RegexReply",
+        "乐",
+        "Emote",
+        "AB起爆器"
+      ],
+      "greet": "测试用欢迎消息。\n\n换行。\n\n结尾。",
+      "isGreet": true
+    },
+    "572808546": {
+      "group_id": 572808546,
+      "module_enabled": [
+        "EssentialsX",
+        "SumikaSql",
+        "SumikaSqlLite",
+        "WebGetImage",
+        "RegexReply",
+        "Winrate",
+        "Gelbooru",
+        "WebGetStat",
+        "Emote",
+        "Mixer"
+      ],
+      "greet": "新人喜欢什么角色？新人请先认真阅读群置顶公告，并遵守注意事项发言交流。",
+      "isGreet": true
+    },
+    "656924686": {
+      "group_id": 656924686,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "690059242": {
+      "group_id": 690059242,
+      "module_enabled": [
+        "EssentialsX",
+        "Emote",
+        "WebGetImage",
+        "Mcmod",
+        "AB起爆器"
+      ],
+      "greet": "宁鸡巴谁啊？",
+      "isGreet": false
+    },
+    "459323533": {
+      "group_id": 459323533,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "939597390": {
+      "group_id": 939597390,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "715122414": {
+      "group_id": 715122414,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "627077331": {
+      "group_id": 627077331,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "223667456": {
+      "group_id": 223667456,
+      "module_enabled": [
+        "EssentialsX",
+        "SumikaSql",
+        "SumikaSqlLite",
+        "WebGetImage",
+        "RegexReply",
+        "Winrate",
+        "Gelbooru",
+        "WebGetStat",
+        "Emote",
+        "Deck",
+        "Mixer",
+        "LhwBattle",
+        "乐"
+      ],
+      "greet": "进门给群主来了发天马流星拳。\n\n在本群发言即视为你已阅读群公告。\n遇到问题请先检索资料，群文件里有宝贝。",
+      "isGreet": true
+    },
+    "475379747": {
+      "group_id": 475379747,
+      "module_enabled": [
+        "Emote",
+        "WebGetImage",
+        "AB起爆器"
+      ],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "672317444": {
+      "group_id": 672317444,
+      "module_enabled": [
+        "Emote",
+        "WebGetImage",
+        "SumikaSql",
+        "Mixer",
+        "WebGetStat",
+        "Deck",
+        "SumikaSqlLite",
+        "Winrate",
+        "EssentialsX",
+        "Gelbooru",
+        "乐",
+        "Mcmod",
+        "RegexReply",
+        "AB起爆器"
+      ],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "1095332446": {
+      "group_id": 1095332446,
+      "module_enabled": [],
+      "greet": "test",
+      "isGreet": false
+    },
+    "498537056": {
+      "group_id": 498537056,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "759544894": {
+      "group_id": 759544894,
+      "module_enabled": [
+        "EssentialsX",
+        "SumikaSql",
+        "SumikaSqlLite",
+        "WebGetImage",
+        "Mixer",
+        "WebGetStat",
+        "Winrate",
+        "Gelbooru",
+        "Emote",
+        "RegexReply"
+      ],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "586837985": {
+      "group_id": 586837985,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "241458328": {
+      "group_id": 241458328,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "935075136": {
+      "group_id": 935075136,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    },
+    "665413046": {
+      "group_id": 665413046,
+      "module_enabled": [],
+      "greet": "欢迎新人！",
+      "isGreet": false
+    }
+  },
+  "operator": [
+    1343450589,
+    2642295156,
+    1753904119,
+    2134641032,
+    904909465,
+    719726026,
+    1427859575,
+    786127631,
+    1845896670,
+    1457654504,
+    2080733464,
+    578683211,
+    1078898994
+  ],
+  "superadmin": [
+    535369354,
+    1191182986,
+    2878376394,
+    762737367,
+    3197676709,
+    1493650099,
+    1845896670,
+    2080733464,
+    786127631
+  ],
+  "blackList": []
+}
